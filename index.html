@@ -1,9 +1,10 @@
+<!-- index.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Trump's First 100 Days of Second Term</title>
+  <title>100‑Day Timeline</title>
   <style>
     body {
       font-family: sans-serif;
@@ -78,7 +79,7 @@
     svg.setAttribute('width', TOTAL_WIDTH);
     svg.setAttribute('height', WRAPPER_HEIGHT);
 
-    // store major box info
+    // store major box bottom‑centers
     const majorPos = {};
 
     fetch('events.json')
@@ -98,7 +99,7 @@
       const { id, day, imageUrl, offset, width, height } = ev;
       const xC = (day - 1) * DAY_WIDTH + DAY_WIDTH / 2;
 
-      // connector
+      // connector up from timeline
       const conn = document.createElement('div');
       conn.className = 'connector';
       conn.style.left   = (xC - 1) + 'px';
@@ -126,8 +127,11 @@
       lbl.style.bottom= (LINE_BOTTOM - 20) + 'px';
       timeline.appendChild(lbl);
 
-      // save for links
-      majorPos[id] = { x: xC, y: LINE_BOTTOM + offset + height/2, width, height };
+      // store bottom‑center for linking
+      majorPos[id] = {
+        x: xC,
+        bottomY: LINE_BOTTOM + offset
+      };
     }
 
     function drawMinor(ev) {
@@ -159,8 +163,11 @@
       lbl.style.bottom= (LINE_BOTTOM - 20) + 'px';
       timeline.appendChild(lbl);
 
-      // stash for linking
-      ev._pos = { x: xC, y: LINE_BOTTOM + offset + height/2 };
+      // stash bottom‑center for linking
+      ev._pos = {
+        x: xC,
+        bottomY: LINE_BOTTOM + offset
+      };
     }
 
     function linkMinorToMajor(ev) {
@@ -168,38 +175,17 @@
       const c = ev._pos;
       if (!p || !c) return;
 
-      // convert to SVG coords
-      const x1 = p.x,      y1 = WRAPPER_HEIGHT - p.y;
-      const x2 = c.x,      y2 = WRAPPER_HEIGHT - c.y;
+      // svg coords: y from top = WRAPPER_HEIGHT - bottom‑y
+      const x1 = c.x,                y1 = WRAPPER_HEIGHT - c.bottomY;
+      const x2 = p.x,                y2 = WRAPPER_HEIGHT - p.bottomY;
 
-      // angle from parent→child
-      const ang = Math.atan2(y2 - y1, x2 - x1);
-
-      // parent edge
-      const dx1 = Math.cos(ang), dy1 = Math.sin(ang);
-      const fx1 = (p.width/2)/Math.abs(Math.cos(ang));
-      const fy1 = (p.height/2)/Math.abs(Math.sin(ang));
-      const d1  = Math.min(fx1, fy1);
-      const sx  = x1 + dx1 * d1;
-      const sy  = y1 + dy1 * d1;
-
-      // child edge (reverse angle)
-      const ang2 = ang + Math.PI;
-      const dx2  = Math.cos(ang2), dy2 = Math.sin(ang2);
-      const fx2  = (ev.width/2)/Math.abs(Math.cos(ang2));
-      const fy2  = (ev.height/2)/Math.abs(Math.sin(ang2));
-      const d2   = Math.min(fx2, fy2);
-      const ex   = x2 + dx2 * d2;
-      const ey   = y2 + dy2 * d2;
-
-      const line = document.createElementNS('http://www.w3.org/2000/svg','line');
-      line.setAttribute('x1', sx);
-      line.setAttribute('y1', sy);
-      line.setAttribute('x2', ex);
-      line.setAttribute('y2', ey);
-      line.setAttribute('stroke', '#333');
-      line.setAttribute('stroke-width', '2');
-      svg.appendChild(line);
+      // draw L‑shaped polyline: start at minor, go horizontally to major x, then vertically to major
+      const poly = document.createElementNS('http://www.w3.org/2000/svg','polyline');
+      poly.setAttribute('points', `${x1},${y1} ${x2},${y1} ${x2},${y2}`);
+      poly.setAttribute('stroke', '#333');
+      poly.setAttribute('fill', 'none');
+      poly.setAttribute('stroke-width', '2');
+      svg.appendChild(poly);
     }
   </script>
 </body>
