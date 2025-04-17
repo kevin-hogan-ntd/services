@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>100‑Day Timeline</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      margin: 20px;
+      text-align: center;
+    }
+    .timeline-wrapper {
+      position: relative;
+      width: 100%;
+      max-width: 800px;
+      height: 350px;
+      margin: 0 auto;
+      overflow-x: auto;
+      border: 1px solid #ccc;
+    }
+    /* the horizontal timeline line */
+    .timeline-line {
+      position: absolute;
+      bottom: 50px;       /* space for day labels below */
+      left: 0;
+      height: 2px;
+      background: #333;
+    }
+    /* the vertical connector from timeline up to image box */
+    .connector {
+      position: absolute;
+      width: 2px;
+      background: #333;
+    }
+    /* container for each event’s image */
+    .image-box {
+      position: absolute;
+      border: 1px solid #333;
+      box-sizing: border-box;
+      overflow: hidden;
+    }
+    .image-box img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    /* day number shown only for days with events */
+    .day-label {
+      position: absolute;
+      font-size: 12px;
+      transform: translateX(-50%);
+    }
+  </style>
+</head>
+<body>
+
+  <h1>100‑Day Timeline</h1>
+  <div class="timeline-wrapper" id="timeline">
+    <div class="timeline-line" id="timelineLine"></div>
+  </div>
+
+  <script>
+    const DAY_COUNT    = 100;
+    const DAY_WIDTH    = 50;    // px per day
+    const OFFSET_LABEL = 20;    // px below line for day label
+    const LINE_BOTTOM  = 50;    // px from bottom of wrapper
+    const TOTAL_WIDTH  = DAY_COUNT * DAY_WIDTH;
+
+    const timeline   = document.getElementById('timeline');
+    const line       = document.getElementById('timelineLine');
+    line.style.width  = TOTAL_WIDTH + 'px';
+
+    // load events from JSON
+    fetch('events.json')
+      .then(r => r.json())
+      .then(events => {
+        events.forEach(ev => renderEvent(ev));
+      })
+      .catch(err => console.error('could not load events.json', err));
+
+    function renderEvent(ev) {
+      const { day, type, imageUrl, offset, width, height } = ev;
+      if (day < 1 || day > DAY_COUNT) return;
+
+      const xCenter = (day - 1) * DAY_WIDTH + DAY_WIDTH / 2;
+
+      // 1. connector
+      const conn = document.createElement('div');
+      conn.className = 'connector';
+      conn.style.height = offset + 'px';
+      conn.style.left   = (xCenter - 1) + 'px';
+      conn.style.bottom = LINE_BOTTOM + 'px';
+      timeline.appendChild(conn);
+
+      // 2. image box
+      const box = document.createElement('div');
+      box.className = 'image-box ' + type;
+      box.style.width  = width + 'px';
+      box.style.height = height + 'px';
+      box.style.left   = (xCenter - width / 2) + 'px';
+      box.style.bottom = (LINE_BOTTOM + offset) + 'px';
+      const img = document.createElement('img');
+      img.src = imageUrl;
+      img.alt = type + ' event';
+      box.appendChild(img);
+      timeline.appendChild(box);
+
+      // 3. day label
+      const lbl = document.createElement('div');
+      lbl.className    = 'day-label';
+      lbl.textContent  = day;
+      lbl.style.left   = xCenter + 'px';
+      lbl.style.bottom = (LINE_BOTTOM - OFFSET_LABEL) + 'px';
+      timeline.appendChild(lbl);
+    }
+  </script>
+
+</body>
+</html>
