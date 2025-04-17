@@ -1,4 +1,3 @@
-<!-- index.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -20,21 +19,18 @@
       overflow-x: auto;
       border: 1px solid #ccc;
     }
-    /* the horizontal timeline line */
     .timeline-line {
       position: absolute;
-      bottom: 50px;       /* space below for day labels */
+      bottom: 50px;
       left: 0;
       height: 2px;
       background: #333;
     }
-    /* vertical connector from timeline up to image box */
     .connector {
       position: absolute;
       width: 2px;
       background: #333;
     }
-    /* container for each image */
     .image-box {
       position: absolute;
       border: 1px solid #333;
@@ -46,13 +42,11 @@
       height: 100%;
       object-fit: cover;
     }
-    /* day number shown only where events attach */
     .day-label {
       position: absolute;
       font-size: 12px;
       transform: translateX(-50%);
     }
-    /* SVG overlay for minor→major links */
     .svg-lines {
       position: absolute;
       top: 0;
@@ -70,31 +64,28 @@
   </div>
 
   <script>
-    const DAY_COUNT     = 100;
-    const DAY_WIDTH     = 50;    // px per day
-    const LINE_BOTTOM   = 50;    // px from bottom of wrapper
-    const TOTAL_WIDTH   = DAY_COUNT * DAY_WIDTH;
-    const WRAPPER_HEIGHT= 350;
+    const DAY_COUNT      = 100;
+    const DAY_WIDTH      = 50;
+    const LINE_BOTTOM    = 50;
+    const TOTAL_WIDTH    = DAY_COUNT * DAY_WIDTH;
+    const WRAPPER_HEIGHT = 350;
 
     const timeline = document.getElementById('timeline');
     const lineEl   = document.getElementById('timelineLine');
     const svg      = document.getElementById('svgLines');
 
-    // size the line and SVG to full width/height
     lineEl.style.width = TOTAL_WIDTH + 'px';
     svg.setAttribute('width', TOTAL_WIDTH);
     svg.setAttribute('height', WRAPPER_HEIGHT);
 
-    // store centers of majors
+    // store major box info
     const majorPos = {};
 
     fetch('events.json')
       .then(r => r.json())
       .then(events => {
-        // first draw majors
         events.filter(e => e.type === 'major')
-              .forEach(ev => drawMajor(ev));
-        // then minors (and link back)
+              .forEach(drawMajor);
         events.filter(e => e.type === 'minor')
               .forEach(ev => {
                 drawMinor(ev);
@@ -107,7 +98,7 @@
       const { id, day, imageUrl, offset, width, height } = ev;
       const xC = (day - 1) * DAY_WIDTH + DAY_WIDTH / 2;
 
-      // vertical connector
+      // connector
       const conn = document.createElement('div');
       conn.className = 'connector';
       conn.style.left   = (xC - 1) + 'px';
@@ -123,8 +114,7 @@
       box.style.width  = width + 'px';
       box.style.height = height + 'px';
       const img = document.createElement('img');
-      img.src = imageUrl;
-      img.alt = 'major event';
+      img.src = imageUrl; img.alt = 'major';
       box.appendChild(img);
       timeline.appendChild(box);
 
@@ -136,11 +126,8 @@
       lbl.style.bottom= (LINE_BOTTOM - 20) + 'px';
       timeline.appendChild(lbl);
 
-      // save center coords for linking
-      majorPos[id] = {
-        x: xC,
-        y: LINE_BOTTOM + offset + height/2
-      };
+      // save for links
+      majorPos[id] = { x: xC, y: LINE_BOTTOM + offset + height/2, width, height };
     }
 
     function drawMinor(ev) {
@@ -161,8 +148,7 @@
       box.style.width  = width + 'px';
       box.style.height = height + 'px';
       const img = document.createElement('img');
-      img.src = imageUrl;
-      img.alt = 'minor event';
+      img.src = imageUrl; img.alt = 'minor';
       box.appendChild(img);
       timeline.appendChild(box);
 
@@ -173,24 +159,44 @@
       lbl.style.bottom= (LINE_BOTTOM - 20) + 'px';
       timeline.appendChild(lbl);
 
-      // stash for linking line
-      ev._pos = {
-        x: xC,
-        y: LINE_BOTTOM + offset + height/2
-      };
+      // stash for linking
+      ev._pos = { x: xC, y: LINE_BOTTOM + offset + height/2 };
     }
 
-    function linkMinorToMajor(minor) {
-      const parent = majorPos[minor.parentId];
-      const child  = minor._pos;
-      if (!parent || !child) return;
+    function linkMinorToMajor(ev) {
+      const p = majorPos[ev.parentId];
+      const c = ev._pos;
+      if (!p || !c) return;
+
+      // convert to SVG coords
+      const x1 = p.x,      y1 = WRAPPER_HEIGHT - p.y;
+      const x2 = c.x,      y2 = WRAPPER_HEIGHT - c.y;
+
+      // angle from parent→child
+      const ang = Math.atan2(y2 - y1, x2 - x1);
+
+      // parent edge
+      const dx1 = Math.cos(ang), dy1 = Math.sin(ang);
+      const fx1 = (p.width/2)/Math.abs(Math.cos(ang));
+      const fy1 = (p.height/2)/Math.abs(Math.sin(ang));
+      const d1  = Math.min(fx1, fy1);
+      const sx  = x1 + dx1 * d1;
+      const sy  = y1 + dy1 * d1;
+
+      // child edge (reverse angle)
+      const ang2 = ang + Math.PI;
+      const dx2  = Math.cos(ang2), dy2 = Math.sin(ang2);
+      const fx2  = (ev.width/2)/Math.abs(Math.cos(ang2));
+      const fy2  = (ev.height/2)/Math.abs(Math.sin(ang2));
+      const d2   = Math.min(fx2, fy2);
+      const ex   = x2 + dx2 * d2;
+      const ey   = y2 + dy2 * d2;
 
       const line = document.createElementNS('http://www.w3.org/2000/svg','line');
-      // SVG coords: y from top, so invert bottom‐based y
-      line.setAttribute('x1', parent.x);
-      line.setAttribute('y1', WRAPPER_HEIGHT - parent.y);
-      line.setAttribute('x2', child.x);
-      line.setAttribute('y2', WRAPPER_HEIGHT - child.y);
+      line.setAttribute('x1', sx);
+      line.setAttribute('y1', sy);
+      line.setAttribute('x2', ex);
+      line.setAttribute('y2', ey);
       line.setAttribute('stroke', '#333');
       line.setAttribute('stroke-width', '2');
       svg.appendChild(line);
