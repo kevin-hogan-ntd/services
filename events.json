@@ -1,74 +1,147 @@
+// events.json
 [
   {
-    "id":       1,
-    "day":      10,
-    "type":     "major",
+    "id": 1,
+    "day": 10,
+    "type": "major",
     "imageUrl": "https://via.placeholder.com/120",
-    "offset":   150,
-    "width":    120,
-    "height":   120
+    "offset": 150,
+    "width": 120,
+    "height": 120
   },
   {
-    "id":       2,
-    "day":      40,
-    "type":     "major",
+    "id": 2,
+    "day": 40,
+    "type": "major",
     "imageUrl": "https://via.placeholder.com/120",
-    "offset":   160,
-    "width":    120,
-    "height":   120
+    "offset": 160,
+    "width": 120,
+    "height": 120
   },
   {
-    "id":       3,
-    "day":      70,
-    "type":     "major",
+    "id": 3,
+    "day": 70,
+    "type": "major",
     "imageUrl": "https://via.placeholder.com/120",
-    "offset":   140,
-    "width":    120,
-    "height":   120
+    "offset": 140,
+    "width": 120,
+    "height": 120
   },
   {
-    "id":       4,
-    "day":      90,
-    "type":     "major",
+    "id": 4,
+    "day": 90,
+    "type": "major",
     "imageUrl": "https://via.placeholder.com/120",
-    "offset":   170,
-    "width":    120,
-    "height":   120
+    "offset": 170,
+    "width": 120,
+    "height": 120
   },
   {
-    "day":       12,
-    "type":      "minor",
-    "imageUrl":  "https://via.placeholder.com/80",
-    "offset":    100,
-    "width":     80,
-    "height":    80,
-    "parentId":  1
+    "day":  5,
+    "type": "minor",
+    "imageUrl": "https://via.placeholder.com/80",
+    "offset": 110,
+    "width":  80,
+    "height": 80,
+    "parentId": 1
   },
   {
-    "day":       15,
-    "type":      "minor",
-    "imageUrl":  "https://via.placeholder.com/80",
-    "offset":    110,
-    "width":     80,
-    "height":    80,
-    "parentId":  1
+    "day":  8,
+    "type": "minor",
+    "imageUrl": "https://via.placeholder.com/80",
+    "offset": 100,
+    "width":  80,
+    "height": 80,
+    "parentId": 1
   },
   {
-    "day":       45,
-    "type":      "minor",
-    "imageUrl":  "https://via.placeholder.com/80",
-    "offset":    120,
-    "width":     80,
-    "height":    80,
-    "parentId":  2
+    "day": 14,
+    "type": "minor",
+    "imageUrl": "https://via.placeholder.com/80",
+    "offset": 120,
+    "width":  80,
+    "height": 80,
+    "parentId": 1
   },
   {
-    "day":       75,
-    "type":      "minor",
-    "imageUrl":  "https://via.placeholder.com/80",
-    "offset":    130,
-    "width":     80,
-    "height":    80,
-    "parentId":  3
+    "day": 35,
+    "type": "minor",
+    "imageUrl": "https://via.placeholder.com/80",
+    "offset": 130,
+    "width":  80,
+    "height": 80,
+    "parentId": 2
+  },
+  {
+    "day": 38,
+    "type": "minor",
+    "imageUrl": "https://via.placeholder.com/80",
+    "offset": 125,
+    "width":  80,
+    "height": 80,
+    "parentId": 2
+  },
+  {
+    "day": 45,
+    "type": "minor",
+    "imageUrl": "https://via.placeholder.com/80",
+    "offset": 135,
+    "width":  80,
+    "height": 80,
+    "parentId": 2
+  },
+  {
+    "day": 65,
+    "type": "minor",
+    "imageUrl": "https://via.placeholder.com/80",
+    "offset": 115,
+    "width":  80,
+    "height": 80,
+    "parentId": 3
+  },
+  {
+    "day": 72,
+    "type": "minor",
+    "imageUrl": "https://via.placeholder.com/80",
+    "offset": 110,
+    "width":  80,
+    "height": 80,
+    "parentId": 3
+  },
+  {
+    "day": 75,
+    "type": "minor",
+    "imageUrl": "https://via.placeholder.com/80",
+    "offset": 120,
+    "width":  80,
+    "height": 80,
+    "parentId": 3
+  },
+  {
+    "day": 85,
+    "type": "minor",
+    "imageUrl": "https://via.placeholder.com/80",
+    "offset": 145,
+    "width":  80,
+    "height": 80,
+    "parentId": 4
+  },
+  {
+    "day": 88,
+    "type": "minor",
+    "imageUrl": "https://via.placeholder.com/80",
+    "offset": 150,
+    "width":  80,
+    "height": 80,
+    "parentId": 4
+  },
+  {
+    "day": 95,
+    "type": "minor",
+    "imageUrl": "https://via.placeholder.com/80",
+    "offset": 155,
+    "width":  80,
+    "height": 80,
+    "parentId": 4
   }
 ]
