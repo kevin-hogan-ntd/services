@@ -19,21 +19,18 @@
       overflow-x: auto;
       border: 1px solid #ccc;
     }
-    /* the horizontal timeline line */
     .timeline-line {
       position: absolute;
-      bottom: 50px;       /* space for day labels below */
+      bottom: 50px;
       left: 0;
       height: 2px;
       background: #333;
     }
-    /* the vertical connector from timeline up to image box */
     .connector {
       position: absolute;
       width: 2px;
       background: #333;
     }
-    /* container for each event’s image */
     .image-box {
       position: absolute;
       border: 1px solid #333;
@@ -45,11 +42,16 @@
       height: 100%;
       object-fit: cover;
     }
-    /* day number shown only for days with events */
     .day-label {
       position: absolute;
       font-size: 12px;
       transform: translateX(-50%);
+    }
+    .svg-lines {
+      position: absolute;
+      top: 0;
+      left: 0;
+      pointer-events: none;
     }
   </style>
 </head>
@@ -57,64 +59,148 @@
 
   <h1>100‑Day Timeline</h1>
   <div class="timeline-wrapper" id="timeline">
+    <svg class="svg-lines" id="svgLines"></svg>
     <div class="timeline-line" id="timelineLine"></div>
   </div>
 
   <script>
-    const DAY_COUNT    = 100;
-    const DAY_WIDTH    = 50;    // px per day
-    const OFFSET_LABEL = 20;    // px below line for day label
-    const LINE_BOTTOM  = 50;    // px from bottom of wrapper
-    const TOTAL_WIDTH  = DAY_COUNT * DAY_WIDTH;
+    const DAY_COUNT      = 100;
+    const DAY_WIDTH      = 50;
+    const LINE_BOTTOM    = 50;
+    const TOTAL_WIDTH    = DAY_COUNT * DAY_WIDTH;
+    const WRAPPER_HEIGHT = 350;
 
-    const timeline   = document.getElementById('timeline');
-    const line       = document.getElementById('timelineLine');
-    line.style.width  = TOTAL_WIDTH + 'px';
+    const timeline = document.getElementById('timeline');
+    const lineEl   = document.getElementById('timelineLine');
+    const svg      = document.getElementById('svgLines');
 
-    // load events from JSON
+    lineEl.style.width = TOTAL_WIDTH + 'px';
+    svg.setAttribute('width', TOTAL_WIDTH);
+    svg.setAttribute('height', WRAPPER_HEIGHT);
+
+    // store major box info
+    const majorPos = {};
+
     fetch('events.json')
       .then(r => r.json())
       .then(events => {
-        events.forEach(ev => renderEvent(ev));
+        events.filter(e => e.type === 'major')
+              .forEach(drawMajor);
+        events.filter(e => e.type === 'minor')
+              .forEach(ev => {
+                drawMinor(ev);
+                linkMinorToMajor(ev);
+              });
       })
-      .catch(err => console.error('could not load events.json', err));
+      .catch(console.error);
 
-    function renderEvent(ev) {
-      const { day, type, imageUrl, offset, width, height } = ev;
-      if (day < 1 || day > DAY_COUNT) return;
+    function drawMajor(ev) {
+      const { id, day, imageUrl, offset, width, height } = ev;
+      const xC = (day - 1) * DAY_WIDTH + DAY_WIDTH / 2;
 
-      const xCenter = (day - 1) * DAY_WIDTH + DAY_WIDTH / 2;
-
-      // 1. connector
+      // connector
       const conn = document.createElement('div');
       conn.className = 'connector';
-      conn.style.height = offset + 'px';
-      conn.style.left   = (xCenter - 1) + 'px';
+      conn.style.left   = (xC - 1) + 'px';
       conn.style.bottom = LINE_BOTTOM + 'px';
+      conn.style.height = offset + 'px';
       timeline.appendChild(conn);
 
-      // 2. image box
+      // image box
       const box = document.createElement('div');
-      box.className = 'image-box ' + type;
+      box.className = 'image-box major';
+      box.style.left   = (xC - width/2) + 'px';
+      box.style.bottom = (LINE_BOTTOM + offset) + 'px';
       box.style.width  = width + 'px';
       box.style.height = height + 'px';
-      box.style.left   = (xCenter - width / 2) + 'px';
-      box.style.bottom = (LINE_BOTTOM + offset) + 'px';
       const img = document.createElement('img');
-      img.src = imageUrl;
-      img.alt = type + ' event';
+      img.src = imageUrl; img.alt = 'major';
       box.appendChild(img);
       timeline.appendChild(box);
 
-      // 3. day label
+      // day label
       const lbl = document.createElement('div');
-      lbl.className    = 'day-label';
-      lbl.textContent  = day;
-      lbl.style.left   = xCenter + 'px';
-      lbl.style.bottom = (LINE_BOTTOM - OFFSET_LABEL) + 'px';
+      lbl.className   = 'day-label';
+      lbl.textContent = day;
+      lbl.style.left  = xC + 'px';
+      lbl.style.bottom= (LINE_BOTTOM - 20) + 'px';
       timeline.appendChild(lbl);
+
+      // save for links
+      majorPos[id] = { x: xC, y: LINE_BOTTOM + offset + height/2, width, height };
+    }
+
+    function drawMinor(ev) {
+      const { day, imageUrl, offset, width, height } = ev;
+      const xC = (day - 1) * DAY_WIDTH + DAY_WIDTH / 2;
+
+      const conn = document.createElement('div');
+      conn.className = 'connector';
+      conn.style.left   = (xC - 1) + 'px';
+      conn.style.bottom = LINE_BOTTOM + 'px';
+      conn.style.height = offset + 'px';
+      timeline.appendChild(conn);
+
+      const box = document.createElement('div');
+      box.className = 'image-box minor';
+      box.style.left   = (xC - width/2) + 'px';
+      box.style.bottom = (LINE_BOTTOM + offset) + 'px';
+      box.style.width  = width + 'px';
+      box.style.height = height + 'px';
+      const img = document.createElement('img');
+      img.src = imageUrl; img.alt = 'minor';
+      box.appendChild(img);
+      timeline.appendChild(box);
+
+      const lbl = document.createElement('div');
+      lbl.className   = 'day-label';
+      lbl.textContent = day;
+      lbl.style.left  = xC + 'px';
+      lbl.style.bottom= (LINE_BOTTOM - 20) + 'px';
+      timeline.appendChild(lbl);
+
+      // stash for linking
+      ev._pos = { x: xC, y: LINE_BOTTOM + offset + height/2 };
+    }
+
+    function linkMinorToMajor(ev) {
+      const p = majorPos[ev.parentId];
+      const c = ev._pos;
+      if (!p || !c) return;
+
+      // convert to SVG coords
+      const x1 = p.x,      y1 = WRAPPER_HEIGHT - p.y;
+      const x2 = c.x,      y2 = WRAPPER_HEIGHT - c.y;
+
+      // angle from parent→child
+      const ang = Math.atan2(y2 - y1, x2 - x1);
+
+      // parent edge
+      const dx1 = Math.cos(ang), dy1 = Math.sin(ang);
+      const fx1 = (p.width/2)/Math.abs(Math.cos(ang));
+      const fy1 = (p.height/2)/Math.abs(Math.sin(ang));
+      const d1  = Math.min(fx1, fy1);
+      const sx  = x1 + dx1 * d1;
+      const sy  = y1 + dy1 * d1;
+
+      // child edge (reverse angle)
+      const ang2 = ang + Math.PI;
+      const dx2  = Math.cos(ang2), dy2 = Math.sin(ang2);
+      const fx2  = (ev.width/2)/Math.abs(Math.cos(ang2));
+      const fy2  = (ev.height/2)/Math.abs(Math.sin(ang2));
+      const d2   = Math.min(fx2, fy2);
+      const ex   = x2 + dx2 * d2;
+      const ey   = y2 + dy2 * d2;
+
+      const line = document.createElementNS('http://www.w3.org/2000/svg','line');
+      line.setAttribute('x1', sx);
+      line.setAttribute('y1', sy);
+      line.setAttribute('x2', ex);
+      line.setAttribute('y2', ey);
+      line.setAttribute('stroke', '#333');
+      line.setAttribute('stroke-width', '2');
+      svg.appendChild(line);
     }
   </script>
-
 </body>
 </html>
