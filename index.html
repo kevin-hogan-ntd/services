@@ -15,7 +15,7 @@
       position: relative;
       width: 100%;
       max-width: 800px;
-      height: 600px; /* increased height to avoid clipping */
+      height: 600px; /* Increased height to show all images */
       margin: 0 auto;
       overflow-x: auto;
       border: 1px solid #ccc;
@@ -43,17 +43,16 @@
       height: 100%;
       object-fit: cover;
     }
-    /* Header overlay for major events */
-    .image-box.major .header-text {
+    .header-text {
       position: absolute;
-      top: 0;
-      width: 100%;
-      background: rgba(0,0,0,0.6);
-      color: #fff;
       font-size: 14px;
-      padding: 4px 0;
-      box-sizing: border-box;
-      text-shadow: 1px 1px 2px rgba(0,0,0,0.8);
+      font-weight: bold;
+      transform: translateX(-50%);
+      white-space: nowrap;
+      background: rgba(255,255,255,0.8);
+      padding: 2px 4px;
+      border-radius: 3px;
+      box-shadow: 0 1px 2px rgba(0,0,0,0.3);
     }
     .day-label {
       position: absolute;
@@ -76,10 +75,10 @@
   </div>
 
   <script>
-    const DAY_COUNT   = 100;
-    const DAY_WIDTH   = 50;
-    const LINE_BOTTOM = 50;
-    const TOTAL_WIDTH = DAY_COUNT * DAY_WIDTH;
+    const DAY_COUNT     = 100;
+    const DAY_WIDTH     = 50;
+    const LINE_BOTTOM   = 50;
+    const TOTAL_WIDTH   = DAY_COUNT * DAY_WIDTH;
     const WRAPPER_HEIGHT = 600;
 
     const timeline = document.getElementById('timeline');
@@ -90,16 +89,15 @@
     svg.setAttribute('width', TOTAL_WIDTH);
     svg.setAttribute('height', WRAPPER_HEIGHT);
 
-    // store major positions for linking
     const majorPos = {};
 
     fetch('events.json')
       .then(r => r.json())
       .then(events => {
-        // Group major events by day to avoid overlap
-        const majorEvents = events.filter(e => e.type === 'major');
+        // Spread majors horizontally when on same day
+        const majors = events.filter(e => e.type === 'major');
         const majorByDay = {};
-        majorEvents.forEach(e => {
+        majors.forEach(e => {
           (majorByDay[e.day] = majorByDay[e.day] || []).push(e);
         });
         Object.values(majorByDay).forEach(group => {
@@ -107,103 +105,99 @@
           group.forEach((ev, i) => {
             const baseX = (ev.day - 1) * DAY_WIDTH + DAY_WIDTH / 2;
             const spacing = ev.width + 20;
-            ev._x = baseX + (i - (n - 1) / 2) * spacing;
+            let x = baseX + (i - (n - 1) / 2) * spacing;
+            // clamp within bounds
+            x = Math.max(ev.width/2, Math.min(TOTAL_WIDTH - ev.width/2, x));
+            ev._x = x;
+          });
+        });
+        // Spread minors similarly
+        const minors = events.filter(e => e.type === 'minor');
+        const minorByDay = {};
+        minors.forEach(e => {
+          (minorByDay[e.day] = minorByDay[e.day] || []).push(e);
+        });
+        Object.values(minorByDay).forEach(group => {
+          const n = group.length;
+          group.forEach((ev, i) => {
+            const baseX = (ev.day - 1) * DAY_WIDTH + DAY_WIDTH / 2;
+            const spacing = ev.width + 10;
+            let x = baseX + (i - (n - 1) / 2) * spacing;
+            x = Math.max(ev.width/2, Math.min(TOTAL_WIDTH - ev.width/2, x));
+            ev._x = x;
           });
         });
 
         // Draw events
-        majorEvents.forEach(drawMajor);
-        events.filter(e => e.type === 'minor')
-              .forEach(ev => {
-                drawMinor(ev);
-                linkMinorToMajor(ev);
-              });
+        majors.forEach(drawMajor);
+        minors.forEach(ev => { drawMinor(ev); linkMinorToMajor(ev); });
       })
       .catch(console.error);
 
     function drawMajor(ev) {
-      const { id, imageUrl, offset, width, height, _x } = ev;
-      const xC = _x;
-
-      // connector up from timeline
+      const { id, offset, width, height, _x, header, imageUrl } = ev;
+      // Connector
       const conn = document.createElement('div');
       conn.className = 'connector';
-      conn.style.left   = (xC - 1) + 'px';
+      conn.style.left   = (_x - 1) + 'px';
       conn.style.bottom = LINE_BOTTOM + 'px';
       conn.style.height = offset + 'px';
       timeline.appendChild(conn);
-
-      // image box
+      // Image box
       const box = document.createElement('div');
       box.className = 'image-box major';
-      box.style.left   = (xC - width/2) + 'px';
+      box.style.left   = (_x - width/2) + 'px';
       box.style.bottom = (LINE_BOTTOM + offset) + 'px';
       box.style.width  = width + 'px';
       box.style.height = height + 'px';
-      const img = document.createElement('img');
-      img.src = imageUrl; img.alt = 'major';
+      const img = document.createElement('img'); img.src = imageUrl; img.alt = 'major';
       box.appendChild(img);
-
-      // header overlay
-      const headerEl = document.createElement('div');
-      headerEl.className = 'header-text';
-      headerEl.textContent = ev.header;
-      box.appendChild(headerEl);
-
       timeline.appendChild(box);
-
-      // day label
+      // Header above image
+      const hdr = document.createElement('div');
+      hdr.className = 'header-text';
+      hdr.textContent = header;
+      hdr.style.left   = _x + 'px';
+      hdr.style.bottom = (LINE_BOTTOM + offset + height + 5) + 'px';
+      timeline.appendChild(hdr);
+      // Day label
       const lbl = document.createElement('div');
-      lbl.className   = 'day-label';
-      lbl.textContent = ev.day;
-      lbl.style.left  = xC + 'px';
-      lbl.style.bottom= (LINE_BOTTOM - 20) + 'px';
+      lbl.className = 'day-label'; lbl.textContent = ev.day;
+      lbl.style.left   = _x + 'px';
+      lbl.style.bottom = (LINE_BOTTOM - 20) + 'px';
       timeline.appendChild(lbl);
-
-      // store for linking
-      majorPos[id] = { x: xC, bottomY: LINE_BOTTOM + offset, height };
+      // Store for linking
+      majorPos[id] = { x: _x, y: LINE_BOTTOM + offset, height };
     }
 
     function drawMinor(ev) {
-      const { day, imageUrl, offset, width, height } = ev;
-      const xC = (day - 1) * DAY_WIDTH + DAY_WIDTH / 2;
-
-      // image box
+      const { offset, width, height, _x, imageUrl } = ev;
       const box = document.createElement('div');
       box.className = 'image-box minor';
-      box.style.left   = (xC - width/2) + 'px';
+      box.style.left   = (_x - width/2) + 'px';
       box.style.bottom = (LINE_BOTTOM + offset) + 'px';
       box.style.width  = width + 'px';
       box.style.height = height + 'px';
-      const img = document.createElement('img');
-      img.src = imageUrl; img.alt = 'minor';
+      const img = document.createElement('img'); img.src = imageUrl; img.alt = 'minor';
       box.appendChild(img);
       timeline.appendChild(box);
-
-      // day label
+      // Day label
       const lbl = document.createElement('div');
-      lbl.className   = 'day-label';
-      lbl.textContent = ev.day;
-      lbl.style.left  = xC + 'px';
-      lbl.style.bottom= (LINE_BOTTOM - 20) + 'px';
+      lbl.className = 'day-label'; lbl.textContent = ev.day;
+      lbl.style.left   = _x + 'px';
+      lbl.style.bottom = (LINE_BOTTOM - 20) + 'px';
       timeline.appendChild(lbl);
-
-      // stash for linking
-      ev._pos = { x: xC, bottomY: LINE_BOTTOM + offset, height };
+      ev._pos = { x: _x, y: LINE_BOTTOM + offset, height };
     }
 
     function linkMinorToMajor(ev) {
       const p = majorPos[ev.parentId];
       const c = ev._pos;
       if (!p || !c) return;
-
-      // convert to SVG coords (y from top)
       const x1 = c.x;
-      const y1 = WRAPPER_HEIGHT - (c.bottomY + c.height);
+      const y1 = WRAPPER_HEIGHT - (c.y + c.height);
       const x2 = p.x;
-      const y2 = WRAPPER_HEIGHT - p.bottomY;
-
-      // straight line between boxes
+      const y2 = WRAPPER_HEIGHT - p.y;
       const line = document.createElementNS('http://www.w3.org/2000/svg','line');
       line.setAttribute('x1', x1);
       line.setAttribute('y1', y1);
