@@ -3,249 +3,255 @@
     "id": 1,
     "day": 1,
     "type": "major",
+    "header": "CARTELS DESIGNATED TERRORISTS",
     "imageUrl": "border.png",
     "offset": 150,
     "width": 120,
     "height": 120
   },
   {
-    "day": 1,
-    "type": "minor",
-    "imageUrl": "doge.png",
-    "offset": 110,
-    "width": 80,
-    "height": 80,
-    "parentId": 1
-  },
-  {
-    "day": 1,
-    "type": "minor",
-    "imageUrl": "birthright.png",
-    "offset": 120,
-    "width": 80,
-    "height": 80,
-    "parentId": 1
-  },
-  {
-    "day": 1,
-    "type": "minor",
-    "imageUrl": "border.png",
-    "offset": 130,
-    "width": 80,
-    "height": 80,
-    "parentId": 1
-  },
-  {
-    "day": 5,
-    "type": "minor",
-    "imageUrl": "hegseth.png",
-    "offset": 115,
-    "width": 80,
-    "height": 80
-  },
-  {
     "id": 2,
-    "day": 10,
+    "day": 1,
     "type": "major",
-    "imageUrl": "riley.png",
+    "header": "DOGE CREATED",
+    "imageUrl": "doge.png",
     "offset": 160,
     "width": 120,
     "height": 120
   },
   {
     "id": 3,
-    "day": 15,
+    "day": 1,
     "type": "major",
-    "imageUrl": "usaid.png",
+    "header": "BIRTHRIGHT CITIZENSHIP ENDED",
+    "imageUrl": "birthright.png",
     "offset": 170,
     "width": 120,
     "height": 120
   },
   {
-    "day": 45,
-    "type": "minor",
-    "imageUrl": "scotus.png",
-    "offset": 155,
-    "width": 80,
-    "height": 80,
-    "parentId": 3
-  },
-  {
-    "day": 24,
-    "type": "minor",
-    "imageUrl": "gabbard.png",
-    "offset": 125,
-    "width": 80,
-    "height": 80
-  },
-  {
-    "day": 25,
-    "type": "minor",
-    "imageUrl": "rfkjr.png",
-    "offset": 135,
-    "width": 80,
-    "height": 80
-  },
-  {
-    "day": 40,
-    "type": "minor",
-    "imageUrl": "border2.png",
-    "offset": 145,
-    "width": 80,
-    "height": 80
-  },
-  {
     "id": 4,
-    "day": 40,
+    "day": 1,
     "type": "major",
-    "imageUrl": "zelenskiy.png",
+    "header": "SECURING OUR BORDERS",
+    "imageUrl": "border.png",
     "offset": 180,
     "width": 120,
     "height": 120
   },
   {
-    "day": 87,
-    "type": "minor",
-    "imageUrl": "mine.png",
-    "offset": 165,
-    "width": 80,
-    "height": 80,
-    "parentId": 4
-  },
-  {
     "id": 5,
-    "day": 47,
+    "day": 10,
     "type": "major",
-    "imageUrl": "columbia.png",
+    "header": "LAKEN RILEY ACT",
+    "imageUrl": "riley.png",
     "offset": 190,
     "width": 120,
     "height": 120
   },
   {
-    "day": 48,
-    "type": "minor",
-    "imageUrl": "khalil.png",
-    "offset": 165,
-    "width": 80,
-    "height": 80,
-    "parentId": 5
-  },
-  {
-    "day": 61,
-    "type": "minor",
-    "imageUrl": "columbia.png",
-    "offset": 175,
-    "width": 80,
-    "height": 80,
-    "parentId": 5
-  },
-  {
-    "day": 85,
-    "type": "minor",
-    "imageUrl": "harvard.png",
-    "offset": 185,
-    "width": 80,
-    "height": 80,
-    "parentId": 5
-  },
-  {
     "id": 6,
-    "day": 53,
+    "day": 15,
     "type": "major",
-    "imageUrl": "rutte.png",
+    "header": "DOGE SHUTTERS USAID",
+    "imageUrl": "usaid.png",
     "offset": 200,
     "width": 120,
     "height": 120
   },
   {
-    "day": 25,
-    "type": "minor",
-    "imageUrl": "rutte2.png",
-    "offset": 195,
-    "width": 80,
-    "height": 80,
-    "parentId": 6
-  },
-  {
     "id": 7,
-    "day": 54,
+    "day": 40,
     "type": "major",
-    "imageUrl": "venezuela.png",
+    "header": "TRUMP MEETS WITH ZELENSKYY",
+    "imageUrl": "zelenskiy.png",
     "offset": 210,
     "width": 120,
     "height": 120
   },
   {
-    "day": 55,
-    "type": "minor",
-    "imageUrl": "boasberg.png",
-    "offset": 215,
-    "width": 80,
-    "height": 80,
-    "parentId": 7
-  },
-  {
-    "day": 56,
-    "type": "minor",
-    "imageUrl": "whitehouse.png",
-    "offset": 225,
-    "width": 80,
-    "height": 80,
-    "parentId": 7
-  },
-  {
-    "day": 66,
-    "type": "minor",
-    "imageUrl": "noem.png",
-    "offset": 235,
-    "width": 80,
-    "height": 80,
-    "parentId": 7
-  },
-  {
-    "day": 50,
-    "type": "minor",
-    "imageUrl": "ice.png",
-    "offset": 205,
-    "width": 80,
-    "height": 80,
-    "parentId": 7
-  },
-  {
     "id": 8,
-    "day": 55,
+    "day": 47,
     "type": "major",
-    "imageUrl": "ratcliffe.png",
+    "header": "COLUMBIA UNIVERSITY DEFUNDED",
+    "imageUrl": "columbia.png",
     "offset": 220,
     "width": 120,
     "height": 120
   },
   {
     "id": 9,
-    "day": 73,
+    "day": 53,
     "type": "major",
-    "imageUrl": "tariffs.png",
+    "header": "TRUMP MEETS NATO CHIEF",
+    "imageUrl": "rutte.png",
     "offset": 230,
     "width": 120,
     "height": 120
   },
   {
-    "day": 79,
+    "id": 10,
+    "day": 54,
+    "type": "major",
+    "header": "ALIEN ENEMIES ACT",
+    "imageUrl": "venezuela.png",
+    "offset": 240,
+    "width": 120,
+    "height": 120
+  },
+  {
+    "id": 11,
+    "day": 55,
+    "type": "major",
+    "header": "SIGNAL LEAK",
+    "imageUrl": "ratcliffe.png",
+    "offset": 250,
+    "width": 120,
+    "height": 120
+  },
+  {
+    "id": 12,
+    "day": 73,
+    "type": "major",
+    "header": "‘LIBERATION DAY’ TARIFFS",
+    "imageUrl": "tariffs.png",
+    "offset": 260,
+    "width": 120,
+    "height": 120
+  },
+  {
+    "day": 5,
     "type": "minor",
-    "imageUrl": "ccp.png",
-    "offset": 245,
+    "imageUrl": "hegseth.png",
+    "offset": 110,
+    "width": 80,
+    "height": 80,
+    "parentId": 1
+  },
+  {
+    "day": 45,
+    "type": "minor",
+    "imageUrl": "scotus.png",
+    "offset": 130,
+    "width": 80,
+    "height": 80,
+    "parentId": 6
+  },
+  {
+    "day": 24,
+    "type": "minor",
+    "imageUrl": "gabbard.png",
+    "offset": 120,
+    "width": 80,
+    "height": 80,
+    "parentId": 6
+  },
+  {
+    "day": 25,
+    "type": "minor",
+    "imageUrl": "rfkjr.png",
+    "offset": 115,
+    "width": 80,
+    "height": 80,
+    "parentId": 6
+  },
+  {
+    "day": 40,
+    "type": "minor",
+    "imageUrl": "border2.png",
+    "offset": 125,
+    "width": 80,
+    "height": 80,
+    "parentId": 7
+  },
+  {
+    "day": 48,
+    "type": "minor",
+    "imageUrl": "khalil.png",
+    "offset": 135,
+    "width": 80,
+    "height": 80,
+    "parentId": 8
+  },
+  {
+    "day": 61,
+    "type": "minor",
+    "imageUrl": "columbia.png",
+    "offset": 140,
+    "width": 80,
+    "height": 80,
+    "parentId": 8
+  },
+  {
+    "day": 85,
+    "type": "minor",
+    "imageUrl": "harvard.png",
+    "offset": 150,
+    "width": 80,
+    "height": 80,
+    "parentId": 8
+  },
+  {
+    "day": 25,
+    "type": "minor",
+    "imageUrl": "rutte2.png",
+    "offset": 145,
     "width": 80,
     "height": 80,
     "parentId": 9
   },
   {
+    "day": 55,
+    "type": "minor",
+    "imageUrl": "boasberg.png",
+    "offset": 155,
+    "width": 80,
+    "height": 80,
+    "parentId": 10
+  },
+  {
+    "day": 56,
+    "type": "minor",
+    "imageUrl": "whitehouse.png",
+    "offset": 160,
+    "width": 80,
+    "height": 80,
+    "parentId": 10
+  },
+  {
+    "day": 66,
+    "type": "minor",
+    "imageUrl": "noem.png",
+    "offset": 165,
+    "width": 80,
+    "height": 80,
+    "parentId": 10
+  },
+  {
+    "day": 50,
+    "type": "minor",
+    "imageUrl": "ice.png",
+    "offset": 168,
+    "width": 80,
+    "height": 80,
+    "parentId": 10
+  },
+  {
+    "day": 79,
+    "type": "minor",
+    "imageUrl": "ccp.png",
+    "offset": 175,
+    "width": 80,
+    "height": 80,
+    "parentId": 12
+  },
+  {
     "day": 87,
     "type": "minor",
     "imageUrl": "tariffs2.png",
-    "offset": 255,
+    "offset": 180,
     "width": 80,
     "height": 80,
-    "parentId": 9
+    "parentId": 12
   }
 ]
-
