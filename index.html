@@ -1,9 +1,9 @@
-<!-- index.html -->
+<!-- Revised index.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>First 100 Days of Trump's Second Term</title>
   <style>
     body {
@@ -15,7 +15,7 @@
       position: relative;
       width: 100%;
       max-width: 800px;
-      height: 350px;
+      height: 600px; /* increased height to avoid clipping */
       margin: 0 auto;
       overflow-x: auto;
       border: 1px solid #ccc;
@@ -43,6 +43,18 @@
       height: 100%;
       object-fit: cover;
     }
+    /* Header overlay for major events */
+    .image-box.major .header-text {
+      position: absolute;
+      top: 0;
+      width: 100%;
+      background: rgba(0,0,0,0.6);
+      color: #fff;
+      font-size: 14px;
+      padding: 4px 0;
+      box-sizing: border-box;
+      text-shadow: 1px 1px 2px rgba(0,0,0,0.8);
+    }
     .day-label {
       position: absolute;
       font-size: 12px;
@@ -57,7 +69,6 @@
   </style>
 </head>
 <body>
-
   <h1>First 100 Days of Trump's Second Term</h1>
   <div class="timeline-wrapper" id="timeline">
     <svg class="svg-lines" id="svgLines"></svg>
@@ -65,11 +76,11 @@
   </div>
 
   <script>
-    const DAY_COUNT      = 100;
-    const DAY_WIDTH      = 50;
-    const LINE_BOTTOM    = 50;
-    const TOTAL_WIDTH    = DAY_COUNT * DAY_WIDTH;
-    const WRAPPER_HEIGHT = 350;
+    const DAY_COUNT   = 100;
+    const DAY_WIDTH   = 50;
+    const LINE_BOTTOM = 50;
+    const TOTAL_WIDTH = DAY_COUNT * DAY_WIDTH;
+    const WRAPPER_HEIGHT = 600;
 
     const timeline = document.getElementById('timeline');
     const lineEl   = document.getElementById('timelineLine');
@@ -79,14 +90,29 @@
     svg.setAttribute('width', TOTAL_WIDTH);
     svg.setAttribute('height', WRAPPER_HEIGHT);
 
-    // store major box bottom‑centers
+    // store major positions for linking
     const majorPos = {};
 
     fetch('events.json')
       .then(r => r.json())
       .then(events => {
-        events.filter(e => e.type === 'major')
-              .forEach(drawMajor);
+        // Group major events by day to avoid overlap
+        const majorEvents = events.filter(e => e.type === 'major');
+        const majorByDay = {};
+        majorEvents.forEach(e => {
+          (majorByDay[e.day] = majorByDay[e.day] || []).push(e);
+        });
+        Object.values(majorByDay).forEach(group => {
+          const n = group.length;
+          group.forEach((ev, i) => {
+            const baseX = (ev.day - 1) * DAY_WIDTH + DAY_WIDTH / 2;
+            const spacing = ev.width + 20;
+            ev._x = baseX + (i - (n - 1) / 2) * spacing;
+          });
+        });
+
+        // Draw events
+        majorEvents.forEach(drawMajor);
         events.filter(e => e.type === 'minor')
               .forEach(ev => {
                 drawMinor(ev);
@@ -96,8 +122,8 @@
       .catch(console.error);
 
     function drawMajor(ev) {
-      const { id, day, imageUrl, offset, width, height } = ev;
-      const xC = (day - 1) * DAY_WIDTH + DAY_WIDTH / 2;
+      const { id, imageUrl, offset, width, height, _x } = ev;
+      const xC = _x;
 
       // connector up from timeline
       const conn = document.createElement('div');
@@ -117,34 +143,32 @@
       const img = document.createElement('img');
       img.src = imageUrl; img.alt = 'major';
       box.appendChild(img);
+
+      // header overlay
+      const headerEl = document.createElement('div');
+      headerEl.className = 'header-text';
+      headerEl.textContent = ev.header;
+      box.appendChild(headerEl);
+
       timeline.appendChild(box);
 
       // day label
       const lbl = document.createElement('div');
       lbl.className   = 'day-label';
-      lbl.textContent = day;
+      lbl.textContent = ev.day;
       lbl.style.left  = xC + 'px';
       lbl.style.bottom= (LINE_BOTTOM - 20) + 'px';
       timeline.appendChild(lbl);
 
-      // store bottom‑center for linking
-      majorPos[id] = {
-        x: xC,
-        bottomY: LINE_BOTTOM + offset
-      };
+      // store for linking
+      majorPos[id] = { x: xC, bottomY: LINE_BOTTOM + offset, height };
     }
 
     function drawMinor(ev) {
       const { day, imageUrl, offset, width, height } = ev;
       const xC = (day - 1) * DAY_WIDTH + DAY_WIDTH / 2;
 
-      const conn = document.createElement('div');
-      conn.className = 'connector';
-      conn.style.left   = (xC - 1) + 'px';
-      conn.style.bottom = LINE_BOTTOM + 'px';
-      conn.style.height = offset + 'px';
-      timeline.appendChild(conn);
-
+      // image box
       const box = document.createElement('div');
       box.className = 'image-box minor';
       box.style.left   = (xC - width/2) + 'px';
@@ -156,18 +180,16 @@
       box.appendChild(img);
       timeline.appendChild(box);
 
+      // day label
       const lbl = document.createElement('div');
       lbl.className   = 'day-label';
-      lbl.textContent = day;
+      lbl.textContent = ev.day;
       lbl.style.left  = xC + 'px';
       lbl.style.bottom= (LINE_BOTTOM - 20) + 'px';
       timeline.appendChild(lbl);
 
-      // stash bottom‑center for linking
-      ev._pos = {
-        x: xC,
-        bottomY: LINE_BOTTOM + offset
-      };
+      // stash for linking
+      ev._pos = { x: xC, bottomY: LINE_BOTTOM + offset, height };
     }
 
     function linkMinorToMajor(ev) {
@@ -175,17 +197,21 @@
       const c = ev._pos;
       if (!p || !c) return;
 
-      // svg coords: y from top = WRAPPER_HEIGHT - bottom‑y
-      const x1 = c.x,                y1 = WRAPPER_HEIGHT - c.bottomY;
-      const x2 = p.x,                y2 = WRAPPER_HEIGHT - p.bottomY;
+      // convert to SVG coords (y from top)
+      const x1 = c.x;
+      const y1 = WRAPPER_HEIGHT - (c.bottomY + c.height);
+      const x2 = p.x;
+      const y2 = WRAPPER_HEIGHT - p.bottomY;
 
-      // draw L‑shaped polyline: start at minor, go horizontally to major x, then vertically to major
-      const poly = document.createElementNS('http://www.w3.org/2000/svg','polyline');
-      poly.setAttribute('points', `${x1},${y1} ${x2},${y1} ${x2},${y2}`);
-      poly.setAttribute('stroke', '#333');
-      poly.setAttribute('fill', 'none');
-      poly.setAttribute('stroke-width', '2');
-      svg.appendChild(poly);
+      // straight line between boxes
+      const line = document.createElementNS('http://www.w3.org/2000/svg','line');
+      line.setAttribute('x1', x1);
+      line.setAttribute('y1', y1);
+      line.setAttribute('x2', x2);
+      line.setAttribute('y2', y2);
+      line.setAttribute('stroke', '#333');
+      line.setAttribute('stroke-width', '2');
+      svg.appendChild(line);
     }
   </script>
 </body>
