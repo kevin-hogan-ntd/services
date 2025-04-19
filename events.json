@@ -9,237 +9,242 @@
     "height": 120
   },
   {
-    "id": 2,
     "day": 1,
-    "type": "major",
-    "imageUrl": "images/doge.png",
-    "offset": 160,
-    "width": 120,
-    "height": 120
-  },
-  {
-    "id": 3,
-    "day": 1,
-    "type": "major",
-    "imageUrl": "images/birthright.png",
-    "offset": 170,
-    "width": 120,
-    "height": 120
-  },
-  {
-    "id": 4,
-    "day": 1,
-    "type": "major",
-    "imageUrl": "images/border.png",
-    "offset": 180,
-    "width": 120,
-    "height": 120
-  },
-  {
-    "id": 5,
-    "day": 10,
-    "type": "major",
-    "imageUrl": "images/riley.png",
-    "offset": 190,
-    "width": 120,
-    "height": 120
-  },
-  {
-    "id": 6,
-    "day": 15,
-    "type": "major",
-    "imageUrl": "images/usaid.png",
-    "offset": 200,
-    "width": 120,
-    "height": 120
-  },
-  {
-    "id": 7,
-    "day": 40,
-    "type": "major",
-    "imageUrl": "images/zelenskiy.png",
-    "offset": 210,
-    "width": 120,
-    "height": 120
-  },
-  {
-    "id": 8,
-    "day": 47,
-    "type": "major",
-    "imageUrl": "images/columbia.png",
-    "offset": 220,
-    "width": 120,
-    "height": 120
-  },
-  {
-    "id": 9,
-    "day": 53,
-    "type": "major",
-    "imageUrl": "images/rutte.png",
-    "offset": 230,
-    "width": 120,
-    "height": 120
-  },
-  {
-    "id": 10,
-    "day": 54,
-    "type": "major",
-    "imageUrl": "images/venezuela.png",
-    "offset": 240,
-    "width": 120,
-    "height": 120
-  },
-  {
-    "id": 11,
-    "day": 55,
-    "type": "major",
-    "imageUrl": "images/ratcliffe.png",
-    "offset": 250,
-    "width": 120,
-    "height": 120
-  },
-  {
-    "id": 12,
-    "day": 73,
-    "type": "major",
-    "imageUrl": "images/tariffs.png",
-    "offset": 260,
-    "width": 120,
-    "height": 120
-  },
-  {
-    "day": 5,
     "type": "minor",
-    "imageUrl": "images/hegseth.png",
+    "imageUrl": "images/doge.png",
     "offset": 110,
     "width": 80,
     "height": 80,
     "parentId": 1
   },
   {
-    "day": 45,
+    "day": 1,
     "type": "minor",
-    "imageUrl": "images/scotus.png",
+    "imageUrl": "images/birthright.png",
+    "offset": 120,
+    "width": 80,
+    "height": 80,
+    "parentId": 1
+  },
+  {
+    "day": 1,
+    "type": "minor",
+    "imageUrl": "images/border.png",
     "offset": 130,
     "width": 80,
     "height": 80,
-    "parentId": 6
+    "parentId": 1
+  },
+  {
+    "day": 5,
+    "type": "minor",
+    "imageUrl": "images/hegseth.png",
+    "offset": 115,
+    "width": 80,
+    "height": 80
+  },
+  {
+    "id": 2,
+    "day": 10,
+    "type": "major",
+    "imageUrl": "images/riley.png",
+    "offset": 160,
+    "width": 120,
+    "height": 120
+  },
+  {
+    "id": 3,
+    "day": 15,
+    "type": "major",
+    "imageUrl": "images/usaid.png",
+    "offset": 170,
+    "width": 120,
+    "height": 120
+  },
+  {
+    "day": 45,
+    "type": "minor",
+    "imageUrl": "images/scotus.png",
+    "offset": 155,
+    "width": 80,
+    "height": 80,
+    "parentId": 3
   },
   {
     "day": 24,
     "type": "minor",
     "imageUrl": "images/gabbard.png",
-    "offset": 120,
+    "offset": 125,
     "width": 80,
-    "height": 80,
-    "parentId": 6
+    "height": 80
   },
   {
     "day": 25,
     "type": "minor",
     "imageUrl": "images/rfkjr.png",
-    "offset": 115,
+    "offset": 135,
     "width": 80,
-    "height": 80,
-    "parentId": 6
+    "height": 80
   },
   {
     "day": 40,
     "type": "minor",
     "imageUrl": "images/border2.png",
-    "offset": 125,
+    "offset": 145,
+    "width": 80,
+    "height": 80
+  },
+  {
+    "id": 4,
+    "day": 40,
+    "type": "major",
+    "imageUrl": "images/zelenskiy.png",
+    "offset": 180,
+    "width": 120,
+    "height": 120
+  },
+  {
+    "day": 87,
+    "type": "minor",
+    "imageUrl": "images/mine.png",
+    "offset": 165,
     "width": 80,
     "height": 80,
-    "parentId": 7
+    "parentId": 4
+  },
+  {
+    "id": 5,
+    "day": 47,
+    "type": "major",
+    "imageUrl": "images/columbia.png",
+    "offset": 190,
+    "width": 120,
+    "height": 120
   },
   {
     "day": 48,
     "type": "minor",
     "imageUrl": "images/khalil.png",
-    "offset": 135,
+    "offset": 165,
     "width": 80,
     "height": 80,
-    "parentId": 8
+    "parentId": 5
   },
   {
     "day": 61,
     "type": "minor",
     "imageUrl": "images/columbia.png",
-    "offset": 140,
+    "offset": 175,
     "width": 80,
     "height": 80,
-    "parentId": 8
+    "parentId": 5
   },
   {
     "day": 85,
     "type": "minor",
     "imageUrl": "images/harvard.png",
-    "offset": 150,
+    "offset": 185,
     "width": 80,
     "height": 80,
-    "parentId": 8
+    "parentId": 5
+  },
+  {
+    "id": 6,
+    "day": 53,
+    "type": "major",
+    "imageUrl": "images/rutte.png",
+    "offset": 200,
+    "width": 120,
+    "height": 120
   },
   {
     "day": 25,
     "type": "minor",
     "imageUrl": "images/rutte2.png",
-    "offset": 145,
+    "offset": 195,
     "width": 80,
     "height": 80,
-    "parentId": 9
+    "parentId": 6
+  },
+  {
+    "id": 7,
+    "day": 54,
+    "type": "major",
+    "imageUrl": "images/venezuela.png",
+    "offset": 210,
+    "width": 120,
+    "height": 120
   },
   {
     "day": 55,
     "type": "minor",
     "imageUrl": "images/boasberg.png",
-    "offset": 155,
+    "offset": 215,
     "width": 80,
     "height": 80,
-    "parentId": 10
+    "parentId": 7
   },
   {
     "day": 56,
     "type": "minor",
     "imageUrl": "images/whitehouse.png",
-    "offset": 160,
+    "offset": 225,
     "width": 80,
     "height": 80,
-    "parentId": 10
+    "parentId": 7
   },
   {
     "day": 66,
     "type": "minor",
     "imageUrl": "images/noem.png",
-    "offset": 165,
+    "offset": 235,
     "width": 80,
     "height": 80,
-    "parentId": 10
+    "parentId": 7
   },
   {
     "day": 50,
     "type": "minor",
     "imageUrl": "images/ice.png",
-    "offset": 168,
+    "offset": 205,
     "width": 80,
     "height": 80,
-    "parentId": 10
+    "parentId": 7
+  },
+  {
+    "id": 8,
+    "day": 55,
+    "type": "major",
+    "imageUrl": "images/ratcliffe.png",
+    "offset": 220,
+    "width": 120,
+    "height": 120
+  },
+  {
+    "id": 9,
+    "day": 73,
+    "type": "major",
+    "imageUrl": "images/tariffs.png",
+    "offset": 230,
+    "width": 120,
+    "height": 120
   },
   {
     "day": 79,
     "type": "minor",
     "imageUrl": "images/ccp.png",
-    "offset": 175,
+    "offset": 245,
     "width": 80,
     "height": 80,
-    "parentId": 12
+    "parentId": 9
   },
   {
     "day": 87,
     "type": "minor",
     "imageUrl": "images/tariffs2.png",
-    "offset": 180,
+    "offset": 255,
     "width": 80,
     "height": 80,
-    "parentId": 12
+    "parentId": 9
   }
 ]
