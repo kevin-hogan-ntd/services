@@ -3,7 +3,7 @@
     "id": 1,
     "day": 1,
     "type": "major",
-    "imageUrl": "images/border.png",
+    "imageUrl": "border.png",
     "offset": 150,
     "width": 120,
     "height": 120
@@ -11,7 +11,7 @@
   {
     "day": 1,
     "type": "minor",
-    "imageUrl": "images/doge.png",
+    "imageUrl": "doge.png",
     "offset": 110,
     "width": 80,
     "height": 80,
@@ -20,7 +20,7 @@
   {
     "day": 1,
     "type": "minor",
-    "imageUrl": "images/birthright.png",
+    "imageUrl": "birthright.png",
     "offset": 120,
     "width": 80,
     "height": 80,
@@ -29,7 +29,7 @@
   {
     "day": 1,
     "type": "minor",
-    "imageUrl": "images/border.png",
+    "imageUrl": "border.png",
     "offset": 130,
     "width": 80,
     "height": 80,
@@ -38,7 +38,7 @@
   {
     "day": 5,
     "type": "minor",
-    "imageUrl": "images/hegseth.png",
+    "imageUrl": "hegseth.png",
     "offset": 115,
     "width": 80,
     "height": 80
@@ -47,7 +47,7 @@
     "id": 2,
     "day": 10,
     "type": "major",
-    "imageUrl": "images/riley.png",
+    "imageUrl": "riley.png",
     "offset": 160,
     "width": 120,
     "height": 120
@@ -56,7 +56,7 @@
     "id": 3,
     "day": 15,
     "type": "major",
-    "imageUrl": "images/usaid.png",
+    "imageUrl": "usaid.png",
     "offset": 170,
     "width": 120,
     "height": 120
@@ -64,7 +64,7 @@
   {
     "day": 45,
     "type": "minor",
-    "imageUrl": "images/scotus.png",
+    "imageUrl": "scotus.png",
     "offset": 155,
     "width": 80,
     "height": 80,
@@ -73,7 +73,7 @@
   {
     "day": 24,
     "type": "minor",
-    "imageUrl": "images/gabbard.png",
+    "imageUrl": "gabbard.png",
     "offset": 125,
     "width": 80,
     "height": 80
@@ -81,7 +81,7 @@
   {
     "day": 25,
     "type": "minor",
-    "imageUrl": "images/rfkjr.png",
+    "imageUrl": "rfkjr.png",
     "offset": 135,
     "width": 80,
     "height": 80
@@ -89,7 +89,7 @@
   {
     "day": 40,
     "type": "minor",
-    "imageUrl": "images/border2.png",
+    "imageUrl": "border2.png",
     "offset": 145,
     "width": 80,
     "height": 80
@@ -98,7 +98,7 @@
     "id": 4,
     "day": 40,
     "type": "major",
-    "imageUrl": "images/zelenskiy.png",
+    "imageUrl": "zelenskiy.png",
     "offset": 180,
     "width": 120,
     "height": 120
@@ -106,7 +106,7 @@
   {
     "day": 87,
     "type": "minor",
-    "imageUrl": "images/mine.png",
+    "imageUrl": "mine.png",
     "offset": 165,
     "width": 80,
     "height": 80,
@@ -116,7 +116,7 @@
     "id": 5,
     "day": 47,
     "type": "major",
-    "imageUrl": "images/columbia.png",
+    "imageUrl": "columbia.png",
     "offset": 190,
     "width": 120,
     "height": 120
@@ -124,7 +124,7 @@
   {
     "day": 48,
     "type": "minor",
-    "imageUrl": "images/khalil.png",
+    "imageUrl": "khalil.png",
     "offset": 165,
     "width": 80,
     "height": 80,
@@ -133,7 +133,7 @@
   {
     "day": 61,
     "type": "minor",
-    "imageUrl": "images/columbia.png",
+    "imageUrl": "columbia.png",
     "offset": 175,
     "width": 80,
     "height": 80,
@@ -142,7 +142,7 @@
   {
     "day": 85,
     "type": "minor",
-    "imageUrl": "images/harvard.png",
+    "imageUrl": "harvard.png",
     "offset": 185,
     "width": 80,
     "height": 80,
@@ -152,7 +152,7 @@
     "id": 6,
     "day": 53,
     "type": "major",
-    "imageUrl": "images/rutte.png",
+    "imageUrl": "rutte.png",
     "offset": 200,
     "width": 120,
     "height": 120
@@ -160,7 +160,7 @@
   {
     "day": 25,
     "type": "minor",
-    "imageUrl": "images/rutte2.png",
+    "imageUrl": "rutte2.png",
     "offset": 195,
     "width": 80,
     "height": 80,
@@ -170,7 +170,7 @@
     "id": 7,
     "day": 54,
     "type": "major",
-    "imageUrl": "images/venezuela.png",
+    "imageUrl": "venezuela.png",
     "offset": 210,
     "width": 120,
     "height": 120
@@ -178,7 +178,7 @@
   {
     "day": 55,
     "type": "minor",
-    "imageUrl": "images/boasberg.png",
+    "imageUrl": "boasberg.png",
     "offset": 215,
     "width": 80,
     "height": 80,
@@ -187,7 +187,7 @@
   {
     "day": 56,
     "type": "minor",
-    "imageUrl": "images/whitehouse.png",
+    "imageUrl": "whitehouse.png",
     "offset": 225,
     "width": 80,
     "height": 80,
@@ -196,7 +196,7 @@
   {
     "day": 66,
     "type": "minor",
-    "imageUrl": "images/noem.png",
+    "imageUrl": "noem.png",
     "offset": 235,
     "width": 80,
     "height": 80,
@@ -205,7 +205,7 @@
   {
     "day": 50,
     "type": "minor",
-    "imageUrl": "images/ice.png",
+    "imageUrl": "ice.png",
     "offset": 205,
     "width": 80,
     "height": 80,
@@ -215,7 +215,7 @@
     "id": 8,
     "day": 55,
     "type": "major",
-    "imageUrl": "images/ratcliffe.png",
+    "imageUrl": "ratcliffe.png",
     "offset": 220,
     "width": 120,
     "height": 120
@@ -224,7 +224,7 @@
     "id": 9,
     "day": 73,
     "type": "major",
-    "imageUrl": "images/tariffs.png",
+    "imageUrl": "tariffs.png",
     "offset": 230,
     "width": 120,
     "height": 120
@@ -232,7 +232,7 @@
   {
     "day": 79,
     "type": "minor",
-    "imageUrl": "images/ccp.png",
+    "imageUrl": "ccp.png",
     "offset": 245,
     "width": 80,
     "height": 80,
@@ -241,10 +241,11 @@
   {
     "day": 87,
     "type": "minor",
-    "imageUrl": "images/tariffs2.png",
+    "imageUrl": "tariffs2.png",
     "offset": 255,
     "width": 80,
     "height": 80,
     "parentId": 9
   }
 ]
+
