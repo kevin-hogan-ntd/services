@@ -1,5 +1,5 @@
 from flask import Flask, request, render_template, send_file
-from 17 import pdf_to_text_cleaned, extract_non_dictionary_words
+from pdf_utils import pdf_to_text_cleaned, extract_non_dictionary_words
 import os
 import uuid
 
