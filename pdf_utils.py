@@ -53,12 +53,14 @@ def extract_non_dictionary_words(text, dictionary_path, output_txt_path):
 
     for para in paragraphs:
         para_lower = para.lower()
-        section_match = re.search(r'\[\[\s*(.*?)\s*\]\]', para_lower)
+
+        # Match either [[pkg]] or [pkg], with optional spaces
+        section_match = re.search(r'\[\[?\s*([^\[\]]+?)\s*\]?\]', para_lower)
         if section_match:
             section_text = section_match.group(1)
-            if 'pkg' in section_text:
+            if 'pkg' in section_text.lower():
                 current_section = 'pkg'
-            elif 'anchor' in section_text:
+            elif 'anchor' in section_text.lower():
                 current_section = 'anchor'
 
         words = re.findall(r"\b[a-zA-Z]+\b", para)
@@ -85,7 +87,3 @@ if __name__ == "__main__":
 
     text = pdf_to_text_cleaned(pdf_input)
     extract_non_dictionary_words(text, dictionary_txt, final_output)
-
-    print("--- CLEANED TEXT START ---")
-    print(text)
-    print("--- CLEANED TEXT END ---")
