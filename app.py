@@ -16,7 +16,14 @@ def index():
             pdf_path = os.path.join(UPLOAD_FOLDER, f"{file_id}.pdf")
             txt_out = os.path.join(UPLOAD_FOLDER, f"{file_id}.txt")
             file.save(pdf_path)
+
             text = pdf_to_text_cleaned(pdf_path)
+
+            # 🔍 Log the full cleaned text to debug pkg issues
+            print("\n--- CLEANED TEXT START ---")
+            print(text)
+            print("--- CLEANED TEXT END ---\n")
+
             extract_non_dictionary_words(text, "words.txt", txt_out)
             return send_file(txt_out, as_attachment=True)
     return render_template("index.html")
