@@ -20,3 +20,6 @@ def index():
             extract_non_dictionary_words(text, "words.txt", txt_out)
             return send_file(txt_out, as_attachment=True)
     return render_template("index.html")
+
+if __name__ == "__main__":
+    app.run(host="0.0.0.0", port=10000)
