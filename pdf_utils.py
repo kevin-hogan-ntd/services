@@ -85,3 +85,7 @@ if __name__ == "__main__":
 
     text = pdf_to_text_cleaned(pdf_input)
     extract_non_dictionary_words(text, dictionary_txt, final_output)
+
+    print("--- CLEANED TEXT START ---")
+    print(text)
+    print("--- CLEANED TEXT END ---")
