@@ -1,6 +1,7 @@
 import fitz  # PyMuPDF
 import re
 import os
+from collections import Counter
 
 # === STEP 1: Clean PDF text ===
 def deduplicate_text(text):
@@ -32,7 +33,7 @@ def pdf_to_text_cleaned(pdf_path):
         print(f"Error processing PDF: {e}")
         return ""
 
-# === STEP 2: Dictionary comparison with stylized duplicate filter ===
+# === STEP 2: Dictionary comparison with enhancements ===
 def load_dictionary(dictionary_path):
     if not os.path.isfile(dictionary_path):
         print(f"Error: Dictionary file not found — {dictionary_path}")
@@ -48,13 +49,13 @@ def extract_non_dictionary_words(text, dictionary_path, output_txt_path):
     paragraphs = text.split('\n\n')
     word_origins = {}
     seen_words = set()
+    word_counter = Counter()
+    long_words = set()
     current_section = None
     duplicate_pattern = re.compile(r'^((\w)\2{2,})+$', re.IGNORECASE)
 
     for para in paragraphs:
         para_lower = para.lower()
-
-        # Match either [[pkg]] or [pkg], with optional spaces
         section_match = re.search(r'\[\[?\s*([^\[\]]+?)\s*\]?\]', para_lower)
         if section_match:
             section_text = section_match.group(1)
@@ -66,24 +67,28 @@ def extract_non_dictionary_words(text, dictionary_path, output_txt_path):
         words = re.findall(r"\b[a-zA-Z]+\b", para)
         for word in words:
             w = word.lower()
+            word_counter[w] += 1
+            if len(w) >= 12:
+                long_words.add(w)
             if (w in dictionary or w in seen_words or is_all_doubled(w) or duplicate_pattern.fullmatch(w)):
                 continue
             seen_words.add(w)
             word_origins[w] = current_section
 
     with open(output_txt_path, "w", encoding="utf-8") as f:
+        f.write("non-dictionary words\n")
         for word in sorted(word_origins.keys()):
             if word_origins[word] == 'pkg':
                 f.write(f"{word} (pkg?)\n")
             else:
                 f.write(f"{word}\n")
+
+        f.write("\n\ninfrequent words\n")
+        for word, count in sorted((w, c) for w, c in word_counter.items() if w in dictionary):
+            f.write(f"{word}, {count}\n")
+
+        f.write("\n\nlong words\n")
+        for word in sorted(long_words):
+            f.write(f"{word}\n")
+
     print(f"{len(word_origins)} unfamiliar words written to: {output_txt_path}")
-
-# === Master Runner ===
-if __name__ == "__main__":
-    pdf_input = "input.pdf"
-    dictionary_txt = "words.txt"
-    final_output = "unfamiliar_words.txt"
-
-    text = pdf_to_text_cleaned(pdf_input)
-    extract_non_dictionary_words(text, dictionary_txt, final_output)
