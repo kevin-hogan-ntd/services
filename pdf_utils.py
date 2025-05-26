@@ -84,7 +84,11 @@ def extract_non_dictionary_words(text, dictionary_path, output_txt_path):
                 f.write(f"{word}\n")
 
         f.write("\n\ninfrequent words\n")
-        for word, count in sorted((w, c) for w, c in word_counter.items() if w in dictionary):
+        freq_list = sorted(
+            [(w, c) for w, c in word_counter.items() if w in dictionary and c < 4],
+            key=lambda x: (x[1], x[0])
+        )
+        for word, count in freq_list:
             f.write(f"{word}, {count}\n")
 
         f.write("\n\nlong words\n")
