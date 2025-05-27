@@ -47,10 +47,14 @@ def is_all_doubled(word):
 def extract_non_dictionary_words(text, dictionary_path, output_txt_path):
     dictionary = load_dictionary(dictionary_path)
     paragraphs = text.split('\n\n')
-    word_origins = {}
-    seen_words = set()
+    word_first_seen = []
     word_counter = Counter()
-    long_words = set()
+    long_words = []
+    word_seen_set = set()
+    long_word_set = set()
+    non_dict_set = set()
+    non_dict_info = {}
+
     current_section = None
     duplicate_pattern = re.compile(r'^((\w)\2{2,})+$', re.IGNORECASE)
 
@@ -67,32 +71,41 @@ def extract_non_dictionary_words(text, dictionary_path, output_txt_path):
         words = re.findall(r"\b[a-zA-Z]+\b", para)
         for word in words:
             w = word.lower()
+            if w not in word_seen_set:
+                word_first_seen.append(w)
+                word_seen_set.add(w)
             word_counter[w] += 1
-            if len(w) >= 12:
-                long_words.add(w)
-            if (w in dictionary or w in seen_words or is_all_doubled(w) or duplicate_pattern.fullmatch(w)):
-                continue
-            seen_words.add(w)
-            word_origins[w] = current_section
+
+            if len(w) >= 12 and w not in long_word_set:
+                long_words.append(w)
+                long_word_set.add(w)
+
+            if (
+                w not in dictionary and
+                w not in non_dict_set and
+                not is_all_doubled(w) and
+                not duplicate_pattern.fullmatch(w)
+            ):
+                non_dict_info[w] = current_section
+                non_dict_set.add(w)
 
     with open(output_txt_path, "w", encoding="utf-8") as f:
         f.write("non-dictionary words\n")
-        for word in sorted(word_origins.keys()):
-            if word_origins[word] == 'pkg':
-                f.write(f"{word} (pkg?)\n")
-            else:
-                f.write(f"{word}\n")
+        for word in word_first_seen:
+            if word in non_dict_info:
+                tag = " (pkg?)" if non_dict_info[word] == 'pkg' else ""
+                f.write(f"{word}{tag}\n")
 
         f.write("\n\ninfrequent words\n")
-        freq_list = sorted(
-            [(w, c) for w, c in word_counter.items() if w in dictionary and c < 4],
-            key=lambda x: (x[1], x[0])
-        )
-        for word, count in freq_list:
-            f.write(f"{word}, {count}\n")
+        for freq in [1, 2, 3]:
+            for word in word_first_seen:
+                if word in dictionary and word_counter[word] == freq:
+                    f.write(f"{word}, {freq}\n")
 
         f.write("\n\nlong words\n")
-        for word in sorted(long_words):
-            f.write(f"{word}\n")
+        for word in word_first_seen:
+            if word in long_word_set:
+                f.write(f"{word}\n")
 
-    print(f"{len(word_origins)} unfamiliar words written to: {output_txt_path}")
+    print(f"{len(non_dict_set)} unfamiliar words written to: {output_txt_path}")
+
