@@ -1,11 +1,61 @@
 <!DOCTYPE html>
-<html>
-<head><title>PDF Word Extractor</title></head>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>Sheet + PDF Processor</title>
+<style>
+  body { font-family: Arial, sans-serif; padding: 24px; }
+  h1  { margin-top: 0; }
+  table { border-collapse: collapse; width: 100%; margin: 16px 0; }
+  th, td { border: 1px solid #ccc; padding: 6px 8px; text-align: left; }
+  th { background: #f4f4f4; }
+  form { margin-top: 32px; }
+</style>
+</head>
 <body>
-  <h2>Upload a PDF</h2>
-  <form action="/" method="post" enctype="multipart/form-data">
-    <input type="file" name="pdf" required>
-    <input type="submit" value="Upload and Process">
+  <h1>Google Sheets Data</h1>
+  <table id="sheetTable"><thead></thead><tbody></tbody></table>
+
+  <h2>Process a PDF</h2>
+  <form action="/upload" method="post" enctype="multipart/form-data">
+    <input type="file" name="pdf" accept="application/pdf" required />
+    <button type="submit">Upload & Annotate</button>
   </form>
+
+<script>
+fetch("/sheet")
+  .then(r => r.json())
+  .then(data => {
+    const thead = document.querySelector("#sheetTable thead");
+    const tbody = document.querySelector("#sheetTable tbody");
+    if (data.length) {
+      // header
+      const hr = document.createElement("tr");
+      data[0].forEach(h => {
+        const th = document.createElement("th");
+        th.textContent = h;
+        hr.appendChild(th);
+      });
+      thead.appendChild(hr);
+      // body
+      data.slice(1).forEach(row => {
+        const tr = document.createElement("tr");
+        row.forEach(cell => {
+          const td = document.createElement("td");
+          td.textContent = cell;
+          tr.appendChild(td);
+        });
+        tbody.appendChild(tr);
+      });
+    } else {
+      tbody.innerHTML = "<tr><td>No data</td></tr>";
+    }
+  })
+  .catch(err => {
+    console.error(err);
+    document.getElementById("sheetTable").outerHTML =
+      "<p>Failed to load sheet data.</p>";
+  });
+</script>
 </body>
 </html>
