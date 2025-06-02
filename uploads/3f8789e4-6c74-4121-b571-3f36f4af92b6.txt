@@ -1,0 +1,906 @@
+non-dictionary words
+distro
+evac
+faizan
+hegseth
+indo
+intvw
+jinping
+makeover
+nera
+outro
+pasdar
+rndup
+schubiner
+shangri
+soundbite
+stef (pkg?)
+tienanmen
+tiktok
+ttw
+vosot
+wcso
+whatcom
+zaki
+
+
+infrequent words (<4 occurrences)
+according, 1
+accusing, 1
+act, 1
+active, 1
+advocates, 1
+aegean, 1
+affecting, 1
+again, 1
+agency, 1
+agriculture, 1
+ahead, 1
+aid, 1
+aide, 1
+aims, 1
+air, 1
+alert, 1
+aligned, 1
+aligns, 1
+all, 1
+allowing, 1
+already, 1
+aluminum, 1
+amber, 1
+american, 1
+amid, 1
+anxiety, 1
+anything, 1
+appear, 1
+area, 1
+arian, 1
+arleen, 1
+around, 1
+arrive, 1
+associations, 1
+astronaut, 1
+astronomers, 1
+attempts, 1
+banned, 1
+because, 1
+beekeeper, 1
+beekeepers, 1
+beekeeping, 1
+being, 1
+best, 1
+billionaire, 1
+blow, 1
+boost, 1
+bound, 1
+brendon, 1
+brighter, 1
+broadcast, 1
+budget, 1
+buildings, 1
+calling, 1
+candies, 1
+capital, 1
+carrying, 1
+cases, 1
+cause, 1
+causing, 1
+celebrity, 1
+cellular, 1
+central, 1
+certainly, 1
+champion, 1
+chance, 1
+children, 1
+circle, 1
+claims, 1
+clock, 1
+close, 1
+closed, 1
+coastal, 1
+cold, 1
+commemorating, 1
+commission, 1
+commitment, 1
+committed, 1
+communist, 1
+community, 1
+consequences, 1
+consideration, 1
+contain, 1
+contest, 1
+continued, 1
+convention, 1
+conversation, 1
+correspondent, 1
+cosmic, 1
+council, 1
+county, 1
+covid, 1
+crammed, 1
+crews, 1
+criticism, 1
+crops, 1
+cuts, 1
+dangers, 1
+daniel, 1
+date, 1
+days, 1
+december, 1
+delayed, 1
+delivered, 1
+department, 1
+depression, 1
+despite, 1
+dialogue, 1
+different, 1
+dioxide, 1
+direct, 1
+director, 1
+discussed, 1
+doctor, 1
+doesn, 1
+dot, 1
+double, 1
+download, 1
+dr, 1
+dry, 1
+e, 1
+each, 1
+earlier, 1
+earth, 1
+easily, 1
+economic, 1
+else, 1
+emergency, 1
+emmanuel, 1
+employees, 1
+ending, 1
+entered, 1
+enthusiasm, 1
+epoch, 1
+equipment, 1
+escaped, 1
+estimated, 1
+europe, 1
+evacuate, 1
+ever, 1
+everyone, 1
+expectation, 1
+expected, 1
+experience, 1
+expert, 1
+explained, 1
+explores, 1
+expressed, 1
+expression, 1
+faces, 1
+fact, 1
+fallon, 1
+farmers, 1
+few, 1
+fewer, 1
+first, 1
+focus, 1
+foods, 1
+force, 1
+forced, 1
+form, 1
+forward, 1
+french, 1
+front, 1
+fronts, 1
+further, 1
+futures, 1
+gaza, 1
+geneva, 1
+george, 1
+getting, 1
+given, 1
+gives, 1
+global, 1
+goers, 1
+goes, 1
+goodbye, 1
+got, 1
+governed, 1
+graveyard, 1
+greece, 1
+greeting, 1
+grow, 1
+guilty, 1
+harmful, 1
+harming, 1
+hassett, 1
+healthy, 1
+high, 1
+him, 1
+himself, 1
+hold, 1
+holds, 1
+home, 1
+honor, 1
+hope, 1
+hopeful, 1
+hopefully, 1
+horseback, 1
+host, 1
+hot, 1
+hotels, 1
+hours, 1
+howard, 1
+hundred, 1
+inc, 1
+including, 1
+industry, 1
+inevitable, 1
+inform, 1
+information, 1
+initially, 1
+interview, 1
+into, 1
+invasion, 1
+involves, 1
+island, 1
+jared, 1
+johnson, 1
+jose, 1
+junior, 1
+k, 1
+kala, 1
+keepers, 1
+kevin, 1
+killed, 1
+know, 1
+la, 1
+later, 1
+latest, 1
+lawmakers, 1
+lawsuits, 1
+layoff, 1
+leader, 1
+leaders, 1
+leadership, 1
+left, 1
+lifetime, 1
+light, 1
+like, 1
+listed, 1
+live, 1
+located, 1
+long, 1
+looking, 1
+macron, 1
+made, 1
+management, 1
+many, 1
+marking, 1
+massacre, 1
+matter, 1
+media, 1
+medicine, 1
+midst, 1
+military, 1
+misinformation, 1
+monaghan, 1
+month, 1
+move, 1
+much, 1
+multiple, 1
+must, 1
+mystery, 1
+nation, 1
+nations, 1
+nearly, 1
+negotiations, 1
+neither, 1
+never, 1
+newly, 1
+night, 1
+nominated, 1
+nominee, 1
+nor, 1
+notable, 1
+noted, 1
+number, 1
+occasion, 1
+off, 1
+once, 1
+ongoing, 1
+opened, 1
+opposes, 1
+organizations, 1
+others, 1
+p, 1
+pardons, 1
+parent, 1
+party, 1
+peace, 1
+pentagon, 1
+percent, 1
+period, 1
+pete, 1
+phase, 1
+philippines, 1
+place, 1
+places, 1
+policy, 1
+politicians, 1
+pollinate, 1
+poses, 1
+post, 1
+potentially, 1
+pounds, 1
+powers, 1
+premier, 1
+prepared, 1
+presidents, 1
+printed, 1
+prior, 1
+private, 1
+programs, 1
+promising, 1
+prompting, 1
+proposal, 1
+provinces, 1
+psychologist, 1
+public, 1
+pulled, 1
+pulsing, 1
+push, 1
+putting, 1
+puzzled, 1
+queen, 1
+questions, 1
+quick, 1
+quote, 1
+rays, 1
+re, 1
+ready, 1
+real, 1
+recent, 1
+recently, 1
+reel, 1
+referenced, 1
+reforms, 1
+refugees, 1
+regulations, 1
+released, 1
+releasing, 1
+remains, 1
+remarks, 1
+rent, 1
+report, 1
+reported, 1
+representatives, 1
+reprieve, 1
+rescue, 1
+resources, 1
+responded, 1
+response, 1
+return, 1
+revival, 1
+riders, 1
+risk, 1
+road, 1
+robert, 1
+russia, 1
+russian, 1
+same, 1
+save, 1
+see, 1
+seen, 1
+seized, 1
+self, 1
+sending, 1
+sends, 1
+set, 1
+shakes, 1
+share, 1
+shared, 1
+sharp, 1
+sheriff, 1
+shift, 1
+shifts, 1
+shinier, 1
+should, 1
+show, 1
+sidelined, 1
+sides, 1
+signals, 1
+signs, 1
+similar, 1
+since, 1
+singapore, 1
+slash, 1
+smoke, 1
+somebody, 1
+someone, 1
+something, 1
+soon, 1
+south, 1
+speaking, 1
+speed, 1
+spending, 1
+spoke, 1
+spokesperson, 1
+square, 1
+stability, 1
+standards, 1
+stark, 1
+start, 1
+starting, 1
+state, 1
+stated, 1
+statement, 1
+states, 1
+staying, 1
+steel, 1
+steer, 1
+strengthen, 1
+stressed, 1
+stretched, 1
+struck, 1
+struggled, 1
+substance, 1
+sudden, 1
+suddenly, 1
+sugarcoat, 1
+suggesting, 1
+summit, 1
+surprise, 1
+surprising, 1
+swarming, 1
+symptoms, 1
+taking, 1
+tanker, 1
+targeted, 1
+tariff, 1
+tariffs, 1
+teenager, 1
+templates, 1
+texas, 1
+thanked, 1
+thanking, 1
+then, 1
+thin, 1
+think, 1
+those, 1
+though, 1
+three, 1
+titanium, 1
+today, 1
+together, 1
+tomorrow, 1
+tone, 1
+totally, 1
+tradition, 1
+transient, 1
+tuning, 1
+turkey, 1
+type, 1
+ukraine, 1
+ukrainian, 1
+unchecked, 1
+unclear, 1
+underway, 1
+unlearned, 1
+urge, 1
+urged, 1
+urgency, 1
+urging, 1
+use, 1
+v, 1
+vacationers, 1
+ve, 1
+video, 1
+violated, 1
+vision, 1
+vital, 1
+vowed, 1
+vs, 1
+wading, 1
+want, 1
+warned, 1
+warnings, 1
+washington, 1
+watch, 1
+waves, 1
+weather, 1
+website, 1
+wednesday, 1
+weighed, 1
+welcome, 1
+well, 1
+while, 1
+why, 1
+willingness, 1
+winner, 1
+winnipeg, 1
+withdrawal, 1
+within, 1
+won, 1
+worked, 1
+worldwide, 1
+wraps, 1
+zzz, 1
+actually, 2
+advice, 2
+after, 2
+agreement, 2
+alberta, 2
+along, 2
+authorities, 2
+b, 2
+blessed, 2
+body, 2
+border, 2
+both, 2
+bright, 2
+british, 2
+bursts, 2
+business, 2
+c, 2
+can, 2
+change, 2
+clear, 2
+company, 2
+concerns, 2
+cont, 2
+coverage, 2
+damage, 2
+desperate, 2
+details, 2
+devastating, 2
+dies, 2
+discovered, 2
+dozen, 2
+dozens, 2
+drew, 2
+escape, 2
+evacuees, 2
+every, 2
+experts, 2
+false, 2
+food, 2
+found, 2
+future, 2
+galaxy, 2
+going, 2
+good, 2
+greek, 2
+growing, 2
+guardian, 2
+help, 2
+highlighted, 2
+his, 2
+honey, 2
+horses, 2
+house, 2
+housewives, 2
+imminent, 2
+international, 2
+isn, 2
+joining, 2
+kennedy, 2
+key, 2
+lead, 2
+let, 2
+linked, 2
+major, 2
+make, 2
+manitoba, 2
+mars, 2
+mayan, 2
+meeting, 2
+meier, 2
+message, 2
+million, 2
+mind, 2
+minute, 2
+mission, 2
+most, 2
+my, 2
+navigate, 2
+near, 2
+nominate, 2
+now, 2
+outlet, 2
+over, 2
+plans, 2
+possible, 2
+preview, 2
+promo, 2
+prosperity, 2
+pushed, 2
+radio, 2
+raised, 2
+reason, 2
+relations, 2
+remain, 2
+removed, 2
+residents, 2
+restructuring, 2
+review, 2
+round, 2
+saskatchewan, 2
+says, 2
+scheduled, 2
+scripps, 2
+secretary, 2
+security, 2
+send, 2
+several, 2
+so, 2
+social, 2
+sotvo, 2
+special, 2
+stepping, 2
+still, 2
+support, 2
+taiwan, 2
+talks, 2
+there, 2
+these, 2
+thousands, 2
+tiffany, 2
+title, 2
+trade, 2
+trending, 2
+truth, 2
+unearthed, 2
+until, 2
+used, 2
+visit, 2
+vote, 2
+w, 2
+warning, 2
+we, 2
+wee, 2
+west, 2
+which, 2
+white, 2
+wildfires, 2
+world, 2
+wrote, 2
+x, 2
+years, 2
+allies, 3
+america, 3
+app, 3
+astounding, 3
+before, 3
+between, 3
+break, 3
+called, 3
+cary, 3
+chinese, 3
+city, 3
+connection, 3
+could, 3
+defense, 3
+detect, 3
+down, 3
+drops, 3
+drug, 3
+elon, 3
+emotions, 3
+evacuated, 3
+evening, 3
+fade, 3
+government, 3
+had, 3
+happen, 3
+info, 3
+june, 3
+last, 3
+leading, 3
+local, 3
+millions, 3
+minutes, 3
+morning, 3
+musk, 3
+n, 3
+names, 3
+national, 3
+next, 3
+open, 3
+other, 3
+physical, 3
+province, 3
+region, 3
+saturday, 3
+saying, 3
+sea, 3
+second, 3
+senate, 3
+some, 3
+specialist, 3
+spelling, 3
+stay, 3
+study, 3
+sure, 3
+talk, 3
+tells, 3
+thank, 3
+them, 3
+they, 3
+tonight, 3
+truck, 3
+what, 3
+who, 3
+wipe, 3
+your, 3
+
+
+long words
+administration
+associations
+commemorating
+consequences
+consideration
+conversation
+correspondent
+international
+misinformation
+negotiations
+organizations
+psychologist
+representatives
+restructuring
+runningorder
+saskatchewan
+spokesperson
+
+
+least frequent 150 known words (from dictionary & en_full.txt)
+pkg (rank 3)
+hassett (rank 5)
+ntd (rank 20)
+goers (rank 21)
+arleen (rank 26)
+scripps (rank 29)
+beekeepers (rank 40)
+unlearned (rank 40)
+vacationers (rank 43)
+templates (rank 45)
+wildfires (rank 51)
+shinier (rank 59)
+cont (rank 63)
+zzz (rank 64)
+aligns (rank 65)
+arian (rank 75)
+nr (rank 78)
+beekeeping (rank 85)
+pollinate (rank 88)
+monaghan (rank 92)
+tariffs (rank 94)
+elon (rank 101)
+evacuees (rank 103)
+layoff (rank 108)
+lawmakers (rank 131)
+commemorating (rank 143)
+additive (rank 144)
+saskatchewan (rank 145)
+manitoba (rank 148)
+sot (rank 152)
+tariff (rank 152)
+beekeeper (rank 157)
+referenced (rank 159)
+explores (rank 169)
+sidelined (rank 173)
+doge (rank 183)
+prompting (rank 183)
+aegean (rank 184)
+misinformation (rank 191)
+epoch (rank 206)
+sugarcoat (rank 212)
+meier (rank 224)
+inception (rank 232)
+trending (rank 261)
+restructuring (rank 262)
+unchecked (rank 264)
+skittles (rank 285)
+kala (rank 295)
+wading (rank 298)
+promo (rank 301)
+advocates (rank 320)
+winnipeg (rank 327)
+brendon (rank 337)
+opposes (rank 346)
+pardons (rank 400)
+alberta (rank 414)
+notable (rank 422)
+associations (rank 433)
+pulsing (rank 435)
+transient (rank 448)
+reprieve (rank 451)
+highlighted (rank 452)
+musk (rank 466)
+unearthed (rank 480)
+vo (rank 488)
+spokesperson (rank 515)
+gaza (rank 567)
+reforms (rank 588)
+emmanuel (rank 596)
+urging (rank 615)
+amid (rank 627)
+harming (rank 634)
+tiff (rank 634)
+willingness (rank 642)
+hives (rank 653)
+vs (rank 654)
+crammed (rank 657)
+governed (rank 670)
+candies (rank 712)
+puzzled (rank 723)
+keepers (rank 725)
+aligned (rank 726)
+revival (rank 741)
+fronts (rank 751)
+nominate (rank 753)
+swarming (rank 754)
+lawsuits (rank 759)
+mayan (rank 766)
+nominee (rank 788)
+ukrainian (rank 811)
+urged (rank 815)
+titanium (rank 840)
+astounding (rank 841)
+futures (rank 872)
+fallon (rank 884)
+aims (rank 892)
+provinces (rank 949)
+coastal (rank 967)
+tuning (rank 1020)
+housewives (rank 1024)
+tanker (rank 1027)
+astronomers (rank 1029)
+preview (rank 1043)
+poses (rank 1045)
+urgency (rank 1059)
+expectation (rank 1064)
+warnings (rank 1069)
+ukraine (rank 1076)
+correspondent (rank 1087)
+vowed (rank 1102)
+marking (rank 1103)
+navigate (rank 1126)
+harmful (rank 1178)
+aide (rank 1183)
+bursts (rank 1188)
+outlet (rank 1205)
+wraps (rank 1206)
+dioxide (rank 1216)
+nomination (rank 1223)
+horseback (rank 1228)
+aluminum (rank 1241)
+intro (rank 1273)
+presidents (rank 1292)
+cellular (rank 1312)
+philippines (rank 1370)
+organizations (rank 1404)
+strengthen (rank 1406)
+unclear (rank 1418)
+premier (rank 1420)
+nominated (rank 1432)
+agriculture (rank 1437)
+evacuated (rank 1453)
+underway (rank 1471)
+billionaire (rank 1500)
+stability (rank 1540)
+hopeful (rank 1550)
+trump (rank 1566)
+celestial (rank 1571)
+xi (rank 1594)
+remarks (rank 1600)
+weighed (rank 1650)
+riders (rank 1651)
+thanked (rank 1662)
+representatives (rank 1693)
+imminent (rank 1716)
+inc (rank 1722)
+affecting (rank 1726)
+withdrawal (rank 1737)
+app (rank 1740)
+slash (rank 1788)
