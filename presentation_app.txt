@@ -1,0 +1,103 @@
+How-To Guide
+
+
+To use Presentation App:
+
+Connect to visitor25 wifi
+
+Go to:
+http://ny-030856.local:8011/
+
+Backend > Uploader
+Create new folder, no spaces in name
+
+Backend > Code Generator
+Scroll down, click your folder
+Add rows, build your presentation
+Select colors, click apply
+Click Generate
+Save entries. Click ok
+Update App. Click ok
+
+Backend > Uploader
+Upload files
+
+(On your computer or eventually on the touchscreen computer)
+Backend > Code Generator
+Download Presentation. Click Keep in the browser downloads history. Go to downloads folder. Copy the downloaded folder onto Desktop or Documents folder. Open the folder. Click index (run in Chrome or Edge by right clicking, open with...). In the browser you should see your presentation which is ready for live once you tab through the slides and make sure they are buffered and ready.
+
+Alternatively, you can download the presentation on your computer, then use a flash drive to copy the files onto the touchscreen computer. Then repeat the process "Copy the downloaded folder onto Desktop or Documents folder..."
+
+(Note: you can view the presentation on the app by going to Frontend and click your folder. But this usually is not broadcast ready because large video files might lag.)
+
+
+
+
+
+To install Presentation App (on Mac)
+
+Install python by pasting this link into browser and following setup:
+
+https://www.python.org/ftp/python/3.12.10/python-3.12.10-macos11.pkg
+
+Download the PresentationLauncher folder here, after getting permission:
+
+https://drive.google.com/drive/folders/1Llv18iTy9R1FGiwxATEPNuTvBUqa6jcn?usp=sharing
+
+Copy folder and put it in Desktop or Documents folder.
+
+Open folder. Right click requirements.txt
+
+Click get info. Copy the filepath next to "Where:"
+
+Open Terminal. Type cd then paste the filepath (ctrl v) and press enter.
+
+Then type:
+
+pip install -r requirements.txt
+
+and press enter and let it install.
+
+Then while still in the Terminal, copy this command:
+
+gunicorn -w 5 -k gthread --threads 8 --timeout 1800 --graceful-timeout 1800 -b 0.0.0.0:8011 app:app
+
+and press enter. 
+
+You should see something like:
+
+(base) news@NY-030856 PresentationLauncher % gunicorn -w 5 -k gthread --threads 8 --timeout 1800 --graceful-timeout 1800 -b 0.0.0.0:8011 app:app
+
+[2025-06-30 13:39:14 -0400] [5681] [INFO] Starting gunicorn 23.0.0
+[2025-06-30 13:39:14 -0400] [5681] [INFO] Listening at: http://0.0.0.0:8011 (5681)
+[2025-06-30 13:39:14 -0400] [5681] [INFO] Using worker: gthread
+[2025-06-30 13:39:14 -0400] [5682] [INFO] Booting worker with pid: 5682
+[2025-06-30 13:39:14 -0400] [5683] [INFO] Booting worker with pid: 5683
+[2025-06-30 13:39:14 -0400] [5684] [INFO] Booting worker with pid: 5684
+[2025-06-30 13:39:14 -0400] [5685] [INFO] Booting worker with pid: 5685
+[2025-06-30 13:39:14 -0400] [5686] [INFO] Booting worker with pid: 5686
+
+It's running. Now go to Apple icon in top left corner of screen > About this Mac > more info and you'll see your computer's name.
+
+Run the app in a browser at this address:
+
+[mac_name].local:8011
+
+For example, ny-030856.local:8011
+
+Then after you shut down your computer or close your terminal, you can restart the app by 
+
+Open PresentationLauncher folder on your computer. Right click app.py
+
+Click get info. Copy the filepath next to "Where:"
+
+Open Terminal. Type cd then paste the filepath (ctrl v) and press enter.
+
+Then type:
+
+gunicorn -w 5 -k gthread --threads 8 --timeout 1800 --graceful-timeout 1800 -b 0.0.0.0:8011 app:app
+
+and press enter. 
+
+
+
