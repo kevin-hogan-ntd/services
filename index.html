@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>NTD News Services</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <style>
+    :root{
+      --radius:16px;
+      --shadow:0 6px 12px rgba(0,0,0,.08);
+      --shadow-hover:0 12px 24px rgba(0,0,0,.14);
+      --bg:#f5f7fa;
+      --card-bg:#ffffff;
+      --text:#222;
+      --accent:#134e9b;
+    }
+    *{box-sizing:border-box;margin:0;padding:0}
+    body{
+      font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+      background:var(--bg);color:var(--text);display:flex;flex-direction:column;
+      align-items:center;min-height:100vh;padding-bottom:60px}
+    h1{margin:40px 0 25px;font-size:2.6rem;text-align:center;color:var(--accent)}
+    h2{margin-top:30px;margin-bottom:16px;font-size:1.5rem;color:#444}
+    .grid{
+      display:grid;gap:32px;width:92%;max-width:1200px;
+      grid-template-columns:repeat(auto-fill,minmax(280px,1fr))}
+    .card{
+      background:var(--card-bg);border-radius:var(--radius);
+      box-shadow:var(--shadow);overflow:hidden;display:flex;flex-direction:column;
+      transition:transform .2s ease,box-shadow .2s ease}
+    .card:hover{transform:translateY(-6px);box-shadow:var(--shadow-hover)}
+    .main-link{text-decoration:none;color:inherit;flex-grow:1;display:block}
+    .main-link img{width:100%;height:420px;object-fit:contain;display:block;padding:40px}
+    .title{padding:0 20px 20px;font-size:1.25rem;font-weight:600;text-align:center}
+    .guide-link{
+      display:block;margin:0 20px 22px;padding:10px 0;border-radius:8px;
+      background:var(--accent);color:#fff;text-align:center;text-decoration:none;
+      font-size:.9rem;font-weight:500;transition:background .2s ease}
+    .guide-link:hover,.guide-link:focus{background:#0e3d7d}
+    .card:focus-within{outline:3px solid var(--accent)}
+    @media(max-width:600px){
+      h1{font-size:2rem}.main-link img{height:160px}}
+  </style>
+</head>
+<body>
+  <h1>NTD News Services</h1>
+
+  <h2>NYC Office Local - Visitor 25 Wifi</h2>
+  <div class="grid">
+
+    <!-- Retriever -->
+    <div class="card">
+      <a class="main-link" href="http://services.local:9001/" target="_blank">
+        <img src="retriever.png" alt="Retriever">
+        <div class="title">Retriever</div>
+      </a>
+      <a class="guide-link" href="/retriever.txt" target="_blank">How‑To‑Use Guide</a>
+    </div>
+
+    <!-- Anchor Dashboard -->
+    <div class="card">
+      <a class="main-link" href="http://services.local:5043/" target="_blank">
+        <img src="anchor_dashboard.png" alt="Anchor Dashboard">
+        <div class="title">Anchor Dashboard</div>
+      </a>
+      <a class="guide-link" href="/anchor_dashboard.txt" target="_blank">How‑To‑Use Guide</a>
+    </div>
+
+    <!-- Unfamiliar Words Sheet -->
+    <div class="card">
+      <a class="main-link" href="https://docs.google.com/spreadsheets/d/1o_LfUI3FaNH_ZGJ7iMAsOSJw1Sw3z12n7nLSXE60LKs/edit?gid=0#gid=0" target="_blank">
+        <img src="unfamiliar_words.png" alt="Unfamiliar Words Sheet">
+        <div class="title">Unfamiliar Words Sheet</div>
+      </a>
+      <a class="guide-link" href="/unfamiliar_words_sheet.txt" target="_blank">How‑To‑Use Guide</a>
+    </div>
+
+    <!-- Presentation App -->
+    <div class="card">
+      <a class="main-link" href="http://ny-030856.local:8011/" target="_blank">
+        <img src="presentation_app.png" alt="Presentation App">
+        <div class="title">Presentation App</div>
+      </a>
+      <a class="guide-link" href="/presentation_app.txt" target="_blank">How‑To‑Use Guide</a>
+    </div>
+  </div>
+
+  <hr style="width:92%;margin:20px auto;border:0;border-top:50px solid #ccc;">
+  
+  
+  <h2>Offsite</h2>
+  <div class="grid">
+
+    <!-- Offsite Retriever -->
+    <div class="card">
+      <a class="main-link" href="https://huggingface.co/spaces/krhogan2/Retriever" target="_blank">
+        <img src="retriever.png" alt="Retriever">
+        <div class="title">Retriever (Offsite)</div>
+      </a>
+      <a class="guide-link" href="/retriever.txt" target="_blank">How‑To‑Use Guide</a>
+    </div>
+
+  </div>
+
+  <script>
+    document.querySelectorAll('.main-link').forEach(link=>{
+      link.addEventListener('keyup',e=>{if(e.key==='Enter') link.click()});
+    });
+  </script>
+</body>
+</html>
