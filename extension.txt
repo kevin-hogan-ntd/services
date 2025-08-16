@@ -1,4 +1,6 @@
-Download the extension folder from the link and save it somewhere on your computer.
+Download the extension folder from the link.
+Unzip it by clicking it and opening it.
+Save the unzipped folder somewhere on your computer.
 Open Chrome and type chrome://extensions/ in the address bar.
 Turn on Developer Mode (switch in the top right).
 Click “Load unpacked” and select the folder you saved.
