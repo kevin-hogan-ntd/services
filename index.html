@@ -21,13 +21,9 @@
       align-items:center;min-height:100vh;padding-bottom:60px}
     h1{margin:32px 0 22px;font-size:2.4rem;text-align:center;color:var(--accent)}
     h2{margin-top:26px;margin-bottom:14px;font-size:1.4rem;color:#444}
-
-    /* ——— Grid tweaks ——— */
     .grid{
       display:grid;gap:24px;width:92%;max-width:1400px;
       grid-template-columns:repeat(auto-fill,minmax(220px,1fr))}
-
-    /* ——— Card tweaks ——— */
     .card{
       background:var(--card-bg);border-radius:var(--radius);
       box-shadow:var(--shadow);overflow:hidden;display:flex;flex-direction:column;
@@ -42,20 +38,18 @@
       font-size:.85rem;font-weight:500;transition:background .2s ease}
     .guide-link:hover,.guide-link:focus{background:#0e3d7d}
     .card:focus-within{outline:3px solid var(--accent)}
-
-    /* ——— Mobile tweaks ——— */
     @media(max-width:600px){
       h1{font-size:2rem}
       .grid{gap:20px}
       .main-link img{height:140px;padding:16px}
     }
+    select{margin:10px;padding:6px}
   </style>
 </head>
 <body>
   <h1>NTD News Services</h1>
 
   <div class="grid">
-      
     <!-- Retriever -->
     <div class="card">
       <a class="main-link" href="https://ntdservices-retriever.hf.space/" target="_blank">
@@ -83,103 +77,130 @@
       <a class="guide-link" href="/unfamiliar_words_sheet.txt" target="_blank">How-To-Use Guide</a>
     </div>
 
-      <!-- Presentation App -->
-  <div class="card">
-    <a class="main-link" href="https://ntd-news-presentation-app-v3.hf.space/" target="_blank">
-      <img src="presentation_app.png" alt="Presentation App">
-      <div class="title">Presentation App</div>
-    </a>
-    <a class="guide-link" href="/presentation_app.txt" target="_blank">How-To-Use Guide</a>
+    <!-- Presentation App -->
+    <div class="card">
+      <a class="main-link" href="https://ntd-news-presentation-app-v3.hf.space/" target="_blank">
+        <img src="presentation_app.png" alt="Presentation App">
+        <div class="title">Presentation App</div>
+      </a>
+      <a class="guide-link" href="/presentation_app.txt" target="_blank">How-To-Use Guide</a>
+    </div>
+
+    <!-- Aggregator -->
+    <div class="card">
+      <a class="main-link" href="https://ntdservices-aggregator.hf.space/" target="_blank">
+        <img src="aggregator.png" alt="Aggregator">
+        <div class="title">News Aggregator</div>
+      </a>
+      <a class="guide-link" href="/aggregator.txt" target="_blank">How-To-Use Guide</a>
+    </div>
   </div>
 
-      <!-- Aggregator -->
-  <div class="card">
-    <a class="main-link" href="https://ntdservices-aggregator.hf.space/" target="_blank">
-      <img src="aggregator.png" alt="Aggregator">
-      <div class="title">News Aggregator</div>
-    </a>
-    <a class="guide-link" href="/aggregator.txt" target="_blank">How-To-Use Guide</a>
-  </div>
-
-</div>
-
-  <hr style="width:92%;margin:18px auto;border:0;border-top:0px solid #f5f7fa;">
   <hr style="width:92%;margin:18px auto;border:0;border-top:40px solid #ccc;">
 
   <h2>Extras</h2>
-  <hr style="width:92%;margin:8px auto;border:0;border-top:0px solid #f5f7fa;">
   <div class="grid">
 
-  <!-- File Hub -->
-  <div class="card">
-    <a class="main-link" href="https://ntdservices-file-hub.hf.space/" target="_blank">
-      <img src="filehub.png" alt="File Hub">
-      <div class="title">File Hub</div>
-    </a>
-    <a class="guide-link" href="/retriever.txt" target="_blank">How-To-Use Guide</a>
-  </div>
+    <!-- File Hub -->
+    <div class="card">
+      <a class="main-link" href="https://ntdservices-file-hub.hf.space/" target="_blank">
+        <img src="filehub.png" alt="File Hub">
+        <div class="title">File Hub</div>
+      </a>
+      <a class="guide-link" href="/retriever.txt" target="_blank">How-To-Use Guide</a>
+    </div>
 
-   <!-- TTS -->
-  <div class="card">
-    <a class="main-link" href="https://luvvoice.com/" target="_blank">
-      <img src="tts.png" alt="File Hub">
-      <div class="title">Luvvoice Text-to-Speech</div>
-    </a>
-    <a class="guide-link" href="/tts.txt" target="_blank">How-To-Use Guide</a>
-  </div>
+    <!-- TTS -->
+    <div class="card">
+      <a class="main-link" href="https://luvvoice.com/" target="_blank">
+        <img src="tts.png" alt="File Hub">
+        <div class="title">Luvvoice Text-to-Speech</div>
+      </a>
+      <a class="guide-link" href="/tts.txt" target="_blank">How-To-Use Guide</a>
+    </div>
 
-  <!-- Merge PDFs -->
-  <div class="card">
-    <a class="main-link" href="https://www.ilovepdf.com/merge_pdf" target="_blank">
-      <img src="merge-pdfs.png" alt="File Hub">
-      <div class="title">Merge PDFs</div>
-    </a>
-    <a class="guide-link" href="/merge-pdfs.txt" target="_blank">How-To-Use Guide</a>
-  </div>
+    <!-- Merge PDFs -->
+    <div class="card">
+      <a class="main-link" href="https://www.ilovepdf.com/merge_pdf" target="_blank">
+        <img src="merge-pdfs.png" alt="File Hub">
+        <div class="title">Merge PDFs</div>
+      </a>
+      <a class="guide-link" href="/merge-pdfs.txt" target="_blank">How-To-Use Guide</a>
+    </div>
 
-    <!-- Chrome Extension (Text & Audio Only) -->
-<div class="card">
-  <!-- Main card click: triggers download -->
-  <a class="main-link" href="Text%20and%20Audio%20Only.zip" download>
-    <img src="extension.png" alt="Chrome Extension">
-    <div class="title">Download Chrome Extension for Text & Audio Only</div>
-  </a>
-  <!-- Optional guide link -->
-  <a class="guide-link" href="/extension.txt" target="_blank">How-To-Use Guide</a>
-</div>
+    <!-- Chrome Extension -->
+    <div class="card">
+      <a class="main-link" href="Text%20and%20Audio%20Only.zip" download>
+        <img src="extension.png" alt="Chrome Extension">
+        <div class="title">Download Chrome Extension for Text & Audio Only</div>
+      </a>
+      <a class="guide-link" href="/extension.txt" target="_blank">How-To-Use Guide</a>
+    </div>
 
+    <!-- Splitter-Merger -->
+    <div class="card">
+      <a class="main-link" href="https://services.hogandashboard.com/splitter-merger/" target="_blank">
+        <img src="splitter-merger.png" alt="splitter-merger">
+        <div class="title">Split Text - Merge Audio</div>
+      </a>
+      <a class="guide-link" href="/splitter-merger.txt" target="_blank">How-To-Use Guide</a>
+      <label for="chunkSize">Chunk size:</label>
+      <select id="chunkSize">
+        <option value="2995">3k</option>
+        <option value="9995">10k</option>
+        <option value="19995">20k</option>
+        <option value="99995">100k</option>
+        <option value="0">No Limit</option>
+      </select>
+    </div>
 
-     <!-- Splitter-Merger -->
-  <div class="card">
-    <a class="main-link" href="https://services.hogandashboard.com/splitter-merger/" target="_blank">
-      <img src="splitter-merger.png" alt="splitter-merger">
-      <div class="title">Split Text - Merge Audio</div>
-    </a>
-    <a class="guide-link" href="/splitter-merger.txt" target="_blank">How-To-Use Guide</a>
-  </div>
+    <!-- HF Token -->
+    <div class="card">
+      <a class="main-link" href="https://huggingface.co/organizations/NTD-News/share/BHDDfyelDYBmZsQObWmxdTzGwWOEiFniLa" target="_blank">
+        <img src="hf-token.png" alt="splitter-merger">
+        <div class="title">Services Token</div>
+      </a>
+      <a class="guide-link" href="/hf-token.txt" target="_blank">How-To-Use Guide</a>
+    </div>
 
-     <!-- HF Token -->
-  <div class="card">
-    <a class="main-link" href="https://huggingface.co/organizations/NTD-News/share/BHDDfyelDYBmZsQObWmxdTzGwWOEiFniLa" target="_blank">
-      <img src="hf-token.png" alt="splitter-merger">
-      <div class="title">Services Token</div>
-    </a>
-    <a class="guide-link" href="/hf-token.txt" target="_blank">How-To-Use Guide</a>
-  </div>
-
-
-         <!-- HF Backend -->
-  <div class="card">
-    <a class="main-link" href="https://huggingface.co/spaces/NTD-News/presentation-app-v3" target="_blank">
-      <img src="hf-backend.png" alt="splitter-merger">
-      <div class="title">Services Backend</div>
-    </a>
-    <a class="guide-link" href="/hf-backend.txt" target="_blank">How-To-Use Guide</a>
-  </div>
-
+    <!-- HF Backend -->
+    <div class="card">
+      <a class="main-link" href="https://huggingface.co/spaces/NTD-News/presentation-app-v3" target="_blank">
+        <img src="hf-backend.png" alt="splitter-merger">
+        <div class="title">Services Backend</div>
+      </a>
+      <a class="guide-link" href="/hf-backend.txt" target="_blank">How-To-Use Guide</a>
+    </div>
   </div>
 
   <script>
+    // Dropdown chunk size
+    document.getElementById('chunkSize').addEventListener('change', function(){
+      let val = parseInt(this.value, 10);
+      if(val > 0) val = val - 5; // subtract 5
+      console.log("Chunk size set to:", val === 0 ? "No Limit" : val);
+      // store to global variable for splitter
+      window.CHUNK_SIZE = val;
+    });
+    window.CHUNK_SIZE = 2995;
+
+    // Fix long MP3 merge freeze: async chunked encoding
+    async function encodeLargeMP3(left, right, sampleRate) {
+      const mp3encoder = new lamejs.Mp3Encoder(2, sampleRate, 128);
+      const blockSize = 1152;
+      const mp3Data = [];
+      for (let i = 0; i < left.length; i += blockSize) {
+        const l = left.subarray(i, i + blockSize);
+        const r = right.subarray(i, i + blockSize);
+        const enc = mp3encoder.encodeBuffer(l, r);
+        if (enc.length > 0) mp3Data.push(enc);
+        if (i % (blockSize * 200) === 0) await new Promise(r=>setTimeout(r,0));
+      }
+      const end = mp3encoder.flush();
+      if (end.length > 0) mp3Data.push(end);
+      return new Blob(mp3Data, {type:"audio/mpeg"});
+    }
+
     document.querySelectorAll('.main-link').forEach(link=>{
       link.addEventListener('keyup',e=>{if(e.key==='Enter') link.click()});
     });
