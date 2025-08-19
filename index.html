@@ -171,39 +171,11 @@
       </a>
       <a class="guide-link" href="/hf-backend.txt" target="_blank">How-To-Use Guide</a>
     </div>
+
+  
+  
   </div>
 
-  <script>
-    // Dropdown chunk size
-    document.getElementById('chunkSize').addEventListener('change', function(){
-      let val = parseInt(this.value, 10);
-      if(val > 0) val = val - 5; // subtract 5
-      console.log("Chunk size set to:", val === 0 ? "No Limit" : val);
-      // store to global variable for splitter
-      window.CHUNK_SIZE = val;
-    });
-    window.CHUNK_SIZE = 2995;
 
-    // Fix long MP3 merge freeze: async chunked encoding
-    async function encodeLargeMP3(left, right, sampleRate) {
-      const mp3encoder = new lamejs.Mp3Encoder(2, sampleRate, 128);
-      const blockSize = 1152;
-      const mp3Data = [];
-      for (let i = 0; i < left.length; i += blockSize) {
-        const l = left.subarray(i, i + blockSize);
-        const r = right.subarray(i, i + blockSize);
-        const enc = mp3encoder.encodeBuffer(l, r);
-        if (enc.length > 0) mp3Data.push(enc);
-        if (i % (blockSize * 200) === 0) await new Promise(r=>setTimeout(r,0));
-      }
-      const end = mp3encoder.flush();
-      if (end.length > 0) mp3Data.push(end);
-      return new Blob(mp3Data, {type:"audio/mpeg"});
-    }
-
-    document.querySelectorAll('.main-link').forEach(link=>{
-      link.addEventListener('keyup',e=>{if(e.key==='Enter') link.click()});
-    });
-  </script>
 </body>
 </html>
