@@ -37,6 +37,10 @@
   button.secondary{background:#182544; color:var(--text); border:1px solid rgba(255,255,255,.08)}
   button.danger{background:#8b2e3a}
   button:disabled{opacity:.6; cursor:not-allowed}
+  select{
+    background:#0e1830; color:var(--text); border:1px solid rgba(255,255,255,.12);
+    padding:9px 10px; border-radius:10px;
+  }
   .segments{
     margin-top:12px; display:grid; gap:8px; grid-template-columns:repeat(auto-fill,minmax(220px,1fr));
   }
@@ -81,10 +85,20 @@
   <div class="app">
     <!-- LEFT: Text → Segments -->
     <div class="card">
-      <h2>Text → ≤2995-char Segments</h2>
+      <h2 id="splitTitle">Text → ≤2995-char Segments</h2>
       <div class="hint">Paste your text, then click “Split”. Each segment gets a Copy button (text stays hidden).</div>
       <textarea id="input" placeholder="Paste large text here…"></textarea>
       <div class="row">
+        <!-- NEW: chunk size selector (subtract 5 from choice) -->
+        <label for="chunkSelect" class="pill" title="Max characters per chunk (we subtract 5 from the chosen value)">Chunk size</label>
+        <select id="chunkSelect" aria-label="Characters per chunk">
+          <option value="3000" selected>3k</option>
+          <option value="10000">10k</option>
+          <option value="20000">20k</option>
+          <option value="100000">100k</option>
+          <option value="nolimit">No limit</option>
+        </select>
+
         <button id="splitBtn">Split to ≤2995 chars</button>
         <button id="clearSegs" class="secondary">Clear Segments</button>
         <span id="segCount" class="pill" aria-live="polite" hidden></span>
@@ -96,12 +110,15 @@
     <div class="card">
       <h2>MP3 Merge (12 slots)</h2>
       <div class="hint">Drag & drop MP3s (or click slots). They will be merged in slot order.</div>
-      <div id="slots" class="slots"></div>
+
+      <!-- MOVED: Controls ABOVE the slots -->
       <div class="controls">
         <button id="mergeBtn">Merge MP3s</button>
         <button id="clearBtn" class="secondary">Clear Slots</button>
         <span id="status" role="status" aria-live="polite"></span>
       </div>
+
+      <div id="slots" class="slots"></div>
       <div id="output" class="out"></div>
     </div>
   </div>
@@ -116,9 +133,10 @@
     // --------------------------
     // TEXT SPLITTER
     // --------------------------
-    const MAX_LEN = 2995;
     const inputEl = document.getElementById('input');
     const splitBtn = document.getElementById('splitBtn');
+    const splitTitle = document.getElementById('splitTitle');
+    const chunkSelect = document.getElementById('chunkSelect');
     const segmentsEl = document.getElementById('segments');
     const segCountEl = document.getElementById('segCount');
     const clearSegsBtn = document.getElementById('clearSegs');
@@ -126,43 +144,56 @@
 
     let segmentsData = [];
 
-    function smartSplit(text, maxLen = MAX_LEN){
+    function chosenMaxLen(){
+      const v = chunkSelect.value;
+      if (v === 'nolimit') return Number.MAX_SAFE_INTEGER; // effectively no split
+      const raw = Number(v) || 3000;
+      return Math.max(1, raw - 5); // subtract 5 chars as requested
+    }
+
+    function updateSplitUI(){
+      const v = chunkSelect.value;
+      if (v === 'nolimit'){
+        splitTitle.textContent = 'Text → No-limit Segments';
+        splitBtn.textContent = 'Split (no limit)';
+      } else {
+        const maxLen = Number(v) - 5;
+        splitTitle.textContent = `Text → ≤${maxLen.toLocaleString()}-char Segments`;
+        splitBtn.textContent = `Split to ≤${maxLen.toLocaleString()} chars`;
+      }
+    }
+    updateSplitUI();
+    chunkSelect.addEventListener('change', updateSplitUI);
+
+    function smartSplit(text, maxLen){
       const parts = [];
       let i = 0;
       const n = text.length;
       while (i < n){
         let end = Math.min(i + maxLen, n);
-        // If we can end on a sentence boundary within the slice, prefer that.
         if (end < n){
           const slice = text.slice(i, end);
-          // last sentence end: ., !, ? possibly followed by quotes/paren
           let boundary = lastBoundaryIndex(slice);
           if (boundary === -1){
-            // fall back to last whitespace to avoid cutting a word
             boundary = slice.lastIndexOf(' ');
           }
           if (boundary > 0){
-            end = i + boundary; // boundary is exclusive
+            end = i + boundary;
           }
         }
-        // Guard: never stuck
         if (end <= i) end = Math.min(i + maxLen, n);
-
         parts.push(text.slice(i, end).trim());
         i = end;
-        // Trim leading whitespace for next chunk
         while (i < n && /\s/.test(text[i])) i++;
       }
-      // Remove any empty tails
       return parts.filter(p => p.length > 0);
     }
 
     function lastBoundaryIndex(slice){
-      // Find the last sentence terminator before the end of the slice
       const re = /[\.!?](?=(?:["'\)\]]|\s|$))/g;
       let idx = -1, m;
       while ((m = re.exec(slice)) !== null){
-        idx = m.index + 1; // include the punctuation
+        idx = m.index + 1;
       }
       return idx;
     }
@@ -192,7 +223,6 @@
       if (navigator.clipboard && navigator.clipboard.writeText){
         navigator.clipboard.writeText(txt).then(()=>showToast('Copied'));
       } else {
-        // Fallback
         const ta = document.createElement('textarea');
         ta.value = txt;
         ta.style.position = 'fixed'; ta.style.left = '-9999px';
@@ -209,20 +239,18 @@
       setTimeout(()=>toast.classList.remove('show'), 900);
     }
 
-   splitBtn.addEventListener('click', ()=>{
-  let txt = inputEl.value || '';
-  if (!txt.trim()){
-    showToast('Nothing to split');
-    return;
-  }
-
-  // NEW: remove all line breaks and carriage returns, collapse extra spaces
-  txt = txt.replace(/(\r\n|\r|\n)/g, ' ').replace(/\s{2,}/g, ' ').trim();
-
-  segmentsData = smartSplit(txt, MAX_LEN);
-  renderSegments();
-});
-
+    splitBtn.addEventListener('click', ()=>{
+      let txt = inputEl.value || '';
+      if (!txt.trim()){
+        showToast('Nothing to split');
+        return;
+      }
+      // remove line breaks and collapse spaces
+      txt = txt.replace(/(\r\n|\r|\n)/g, ' ').replace(/\s{2,}/g, ' ').trim();
+      const maxLen = chosenMaxLen();
+      segmentsData = smartSplit(txt, maxLen);
+      renderSegments();
+    });
 
     clearSegsBtn.addEventListener('click', ()=>{
       segmentsData = [];
@@ -239,13 +267,12 @@
     const statusEl = document.getElementById('status');
     const outputEl = document.getElementById('output');
 
-    // Each slot: { file, name, arrayBuffer, audioBuffer, duration }
     const slotsData = new Array(SLOT_COUNT).fill(null);
-    let audioCtx; // created lazily
+    let audioCtx;
 
     function ensureAudioCtx(){
       if (!audioCtx){
-        const sr = 44100; // prefer 44.1k for MP3
+        const sr = 44100;
         audioCtx = new (window.AudioContext || window.webkitAudioContext)({ sampleRate: sr });
       }
       return audioCtx;
@@ -311,7 +338,6 @@
         card.append(h4, msg, info, small, actions, fileInput);
         slotsEl.appendChild(card);
 
-        // Populate if data exists
         if (slotsData[i]){
           msg.style.display='none';
           info.textContent = `📄 ${slotsData[i].name}`;
@@ -335,7 +361,6 @@
         const arrayBuffer = reader.result;
         try{
           const ctx = ensureAudioCtx();
-          // Decode to get duration (browser must support mp3 decoding)
           const audioBuffer = await ctx.decodeAudioData(arrayBuffer.slice(0));
           setSlot(idx, {
             file, name:file.name, arrayBuffer, audioBuffer,
@@ -367,6 +392,9 @@
       renderSlots(); outputEl.innerHTML=''; showStatus('Cleared all slots');
     });
 
+    // Helper to keep UI responsive during heavy work
+    const breathe = () => new Promise(r => setTimeout(r, 0));
+
     // Merge button
     mergeBtn.addEventListener('click', async ()=>{
       outputEl.innerHTML = '';
@@ -375,10 +403,10 @@
         showStatus('No MP3s to merge', true);
         return;
       }
+      mergeBtn.disabled = true; clearBtn.disabled = true;
       try{
         showStatus('Preparing…');
 
-        // Ensure all decoded and resampled to 44.1kHz stereo
         const targetSR = 44100;
         const prepared = [];
         for (let k=0;k<list.length;k++){
@@ -389,12 +417,11 @@
             const ctx = ensureAudioCtx();
             buf = await ctx.decodeAudioData(d.arrayBuffer.slice(0));
           }
-          // Resample & force stereo
           const res = await resampleToStereo(buf, targetSR);
           prepared.push(res);
+          if (k % 1 === 0) await breathe(); // let the browser breathe
         }
 
-        // Concatenate PCM
         const totalFrames = prepared.reduce((a,b)=>a + b.length, 0);
         const left = new Float32Array(totalFrames);
         const right = new Float32Array(totalFrames);
@@ -403,10 +430,13 @@
           left.set(b.getChannelData(0), offset);
           right.set(b.getChannelData(1), offset);
           offset += b.length;
+          if (offset % (44100*30) === 0) await breathe(); // yield periodically while copying
         }
 
-        showStatus('Encoding MP3… (this runs entirely in your browser)');
-        const mp3Blob = encodeStereoToMp3(left, right, targetSR, 128); // kbps
+        showStatus('Encoding MP3… 0% (runs in your browser)');
+        const mp3Blob = await encodeStereoToMp3(left, right, targetSR, 128, p=>{
+          showStatus(`Encoding MP3… ${p}%`);
+        });
         const url = URL.createObjectURL(mp3Blob);
 
         const a = document.createElement('a');
@@ -421,11 +451,12 @@
       }catch(err){
         console.error(err);
         showStatus('Merge failed: ' + (err?.message || err), true);
+      } finally {
+        mergeBtn.disabled = false; clearBtn.disabled = false;
       }
     });
 
     async function resampleToStereo(audioBuffer, targetSR){
-      // If already stereo 44.1k, return as-is
       const needSR = audioBuffer.sampleRate !== targetSR;
       const needStereo = audioBuffer.numberOfChannels < 2;
       if (!needSR && !needStereo) return audioBuffer;
@@ -433,22 +464,11 @@
       const length = Math.ceil(audioBuffer.duration * targetSR);
       const offline = new OfflineAudioContext(2, length, targetSR);
       const src = offline.createBufferSource();
-
-      // Ensure stereo input
-      let inBuf = audioBuffer;
-      if (audioBuffer.numberOfChannels === 1){
-        // duplicate mono to stereo buffer first (at original SR)
-        const tmp = offline.context ? offline.context.createBuffer(2, audioBuffer.length, audioBuffer.sampleRate)
-                                    : new AudioBuffer({length: audioBuffer.length, sampleRate: audioBuffer.sampleRate, numberOfChannels: 2});
-      }
-
-      // Workaround: schedule original buffer into OfflineAudioContext; it will handle channel count
-      src.buffer = audioBuffer;
+      src.buffer = audioBuffer; // OfflineAudioContext will handle channel count
       src.connect(offline.destination);
       src.start(0);
       const rendered = await offline.startRendering();
 
-      // Ensure exactly 2 channels
       if (rendered.numberOfChannels === 2) return rendered;
       const out = new AudioBuffer({ length: rendered.length, sampleRate: targetSR, numberOfChannels: 2 });
       out.getChannelData(0).set(rendered.getChannelData(0));
@@ -456,20 +476,33 @@
       return out;
     }
 
-    function encodeStereoToMp3(leftF32, rightF32, sampleRate, kbps=128){
+    // ASYNC encoder with periodic yields to avoid "Page Unresponsive"
+    async function encodeStereoToMp3(leftF32, rightF32, sampleRate, kbps=128, onProgress){
       const blockSize = 1152;
       const mp3encoder = new lamejs.Mp3Encoder(2, sampleRate, kbps);
       const mp3Data = [];
-      let left16 = floatTo16(leftF32);
-      let right16 = floatTo16(rightF32);
-      for (let i = 0; i < left16.length; i += blockSize){
+      const left16 = floatTo16(leftF32);
+      const right16 = floatTo16(rightF32);
+
+      const total = left16.length;
+      let lastPct = -1;
+
+      for (let i = 0; i < total; i += blockSize){
         const l = left16.subarray(i, i + blockSize);
         const r = right16.subarray(i, i + blockSize);
         const enc = mp3encoder.encodeBuffer(l, r);
         if (enc.length) mp3Data.push(enc);
+
+        // progress + yield
+        if (onProgress){
+          const pct = Math.min(100, Math.floor((i/total)*100));
+          if (pct !== lastPct){ lastPct = pct; onProgress(pct); }
+        }
+        if ((i / blockSize) % 50 === 0) await breathe(); // yield every ~50 frames
       }
       const end = mp3encoder.flush();
       if (end.length) mp3Data.push(end);
+      if (onProgress) onProgress(100);
       return new Blob(mp3Data, { type: 'audio/mpeg' });
     }
 
