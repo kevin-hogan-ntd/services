@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Text Segmenter + MP3 Merger</title>
+<style>
+  :root{
+    --bg:#0b1220; --panel:#121a2e; --muted:#9fb0cf; --text:#e6edf7;
+    --accent:#3a8dde; --accent2:#6ea8ff; --radius:14px; --shadow:0 10px 28px rgba(2,8,23,.35);
+  }
+  *{box-sizing:border-box}
+  html,body{height:100%}
+  body{
+    margin:0; background:linear-gradient(180deg,#0a1120,#0b1220 35%,#0b1220);
+    color:var(--text); font:14px/1.4 ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,Arial;
+  }
+  .app{
+    max-width:1400px; margin:20px auto; padding:16px;
+    display:grid; gap:16px; grid-template-columns:1fr 1fr;
+  }
+  .card{
+    background:var(--panel); border-radius:var(--radius); box-shadow:var(--shadow);
+    padding:16px; border:1px solid rgba(255,255,255,.06);
+  }
+  h2{margin:0 0 12px 0; font-size:18px}
+  .hint{color:var(--muted); font-size:12px; margin-top:6px}
+  textarea{
+    width:100%; min-height:180px; border-radius:10px; border:1px solid rgba(255,255,255,.08);
+    background:#0e1830; color:var(--text); padding:12px; resize:vertical; outline:none;
+  }
+  .row{display:flex; gap:8px; align-items:center; flex-wrap:wrap; margin-top:10px}
+  button{
+    background:linear-gradient(180deg,var(--accent),var(--accent2)); color:#06142a; font-weight:700;
+    border:none; padding:10px 14px; border-radius:10px; cursor:pointer;
+  }
+  button.secondary{background:#182544; color:var(--text); border:1px solid rgba(255,255,255,.08)}
+  button.danger{background:#8b2e3a}
+  button:disabled{opacity:.6; cursor:not-allowed}
+  .segments{
+    margin-top:12px; display:grid; gap:8px; grid-template-columns:repeat(auto-fill,minmax(220px,1fr));
+  }
+  .seg{
+    background:#0f1730; border:1px dashed rgba(255,255,255,.15); border-radius:12px; padding:10px;
+    display:flex; align-items:center; justify-content:space-between; gap:8px;
+  }
+  .seg .meta{font-size:12px; color:var(--muted)}
+  .seg button{padding:6px 10px}
+  .slots{
+    display:grid; gap:10px; grid-template-columns:repeat(3,1fr);
+  }
+  .slot{
+    background:#0f1730; border:1px dashed rgba(255,255,255,.18); border-radius:12px;
+    padding:12px; min-height:92px; display:flex; flex-direction:column; gap:8px; position:relative;
+  }
+  .slot.dragover{border-color:var(--accent2); background:#122044}
+  .slot h4{margin:0; font-size:13px; color:var(--muted)}
+  .slot .dropmsg{font-size:13px; color:#cfe1ff; opacity:.85}
+  .slot .fileline{font-size:13px}
+  .slot .small{font-size:12px; color:var(--muted)}
+  .slot .actions{display:flex; gap:6px; margin-top:auto}
+  .slot input[type="file"]{display:none}
+  .controls{display:flex; gap:10px; align-items:center; margin-top:12px; flex-wrap:wrap}
+  #status{color:#aad0ff; font-size:13px}
+  .out{margin-top:12px; display:flex; align-items:center; gap:12px; flex-wrap:wrap}
+  .pill{
+    display:inline-flex; align-items:center; gap:6px; background:#123; border:1px solid rgba(255,255,255,.08);
+    color:#cfe1ff; padding:6px 10px; border-radius:999px; font-size:12px;
+  }
+  .copy-toast{
+    position:fixed; left:50%; bottom:24px; transform:translateX(-50%);
+    background:#0e1830; border:1px solid rgba(255,255,255,.1); color:#cfe1ff;
+    padding:10px 14px; border-radius:12px; box-shadow:var(--shadow); opacity:0; pointer-events:none;
+    transition:opacity .25s ease;
+  }
+  .copy-toast.show{opacity:1}
+  @media (max-width: 980px){ .app{grid-template-columns:1fr} }
+</style>
+</head>
+<body>
+  <div class="app">
+    <!-- LEFT: Text → Segments -->
+    <div class="card">
+      <h2>Text → ≤2995-char Segments</h2>
+      <div class="hint">Paste your text, then click “Split”. Each segment gets a Copy button (text stays hidden).</div>
+      <textarea id="input" placeholder="Paste large text here…"></textarea>
+      <div class="row">
+        <button id="splitBtn">Split to ≤2995 chars</button>
+        <button id="clearSegs" class="secondary">Clear Segments</button>
+        <span id="segCount" class="pill" aria-live="polite" hidden></span>
+      </div>
+      <div id="segments" class="segments" aria-live="polite"></div>
+    </div>
+
+    <!-- RIGHT: MP3 merge -->
+    <div class="card">
+      <h2>MP3 Merge (12 slots)</h2>
+      <div class="hint">Drag & drop MP3s (or click slots). They will be merged in slot order.</div>
+      <div id="slots" class="slots"></div>
+      <div class="controls">
+        <button id="mergeBtn">Merge MP3s</button>
+        <button id="clearBtn" class="secondary">Clear Slots</button>
+        <span id="status" role="status" aria-live="polite"></span>
+      </div>
+      <div id="output" class="out"></div>
+    </div>
+  </div>
+
+  <div id="toast" class="copy-toast" role="status" aria-live="polite">Copied</div>
+
+  <!-- MP3 encoder -->
+  <script src="https://cdn.jsdelivr.net/npm/lamejs@1.2.0/lame.min.js"></script>
+
+  <script>
+  (function(){
+    // --------------------------
+    // TEXT SPLITTER
+    // --------------------------
+    const MAX_LEN = 2995;
+    const inputEl = document.getElementById('input');
+    const splitBtn = document.getElementById('splitBtn');
+    const segmentsEl = document.getElementById('segments');
+    const segCountEl = document.getElementById('segCount');
+    const clearSegsBtn = document.getElementById('clearSegs');
+    const toast = document.getElementById('toast');
+
+    let segmentsData = [];
+
+    function smartSplit(text, maxLen = MAX_LEN){
+      const parts = [];
+      let i = 0;
+      const n = text.length;
+      while (i < n){
+        let end = Math.min(i + maxLen, n);
+        // If we can end on a sentence boundary within the slice, prefer that.
+        if (end < n){
+          const slice = text.slice(i, end);
+          // last sentence end: ., !, ? possibly followed by quotes/paren
+          let boundary = lastBoundaryIndex(slice);
+          if (boundary === -1){
+            // fall back to last whitespace to avoid cutting a word
+            boundary = slice.lastIndexOf(' ');
+          }
+          if (boundary > 0){
+            end = i + boundary; // boundary is exclusive
+          }
+        }
+        // Guard: never stuck
+        if (end <= i) end = Math.min(i + maxLen, n);
+
+        parts.push(text.slice(i, end).trim());
+        i = end;
+        // Trim leading whitespace for next chunk
+        while (i < n && /\s/.test(text[i])) i++;
+      }
+      // Remove any empty tails
+      return parts.filter(p => p.length > 0);
+    }
+
+    function lastBoundaryIndex(slice){
+      // Find the last sentence terminator before the end of the slice
+      const re = /[\.!?](?=(?:["'\)\]]|\s|$))/g;
+      let idx = -1, m;
+      while ((m = re.exec(slice)) !== null){
+        idx = m.index + 1; // include the punctuation
+      }
+      return idx;
+    }
+
+    function renderSegments(){
+      segmentsEl.innerHTML = '';
+      segCountEl.hidden = segmentsData.length === 0;
+      if (!segCountEl.hidden){
+        const totalChars = segmentsData.reduce((a,s)=>a+s.length,0);
+        segCountEl.textContent = `Segments: ${segmentsData.length} • ${totalChars.toLocaleString()} chars`;
+      }
+      segmentsData.forEach((seg, i)=>{
+        const div = document.createElement('div');
+        div.className = 'seg';
+        const meta = document.createElement('div');
+        meta.className = 'meta';
+        meta.textContent = `Segment ${i+1} • ${seg.length} chars`;
+        const copyBtn = document.createElement('button');
+        copyBtn.textContent = 'Copy';
+        copyBtn.addEventListener('click', ()=>copyText(seg));
+        div.append(meta, copyBtn);
+        segmentsEl.appendChild(div);
+      });
+    }
+
+    function copyText(txt){
+      if (navigator.clipboard && navigator.clipboard.writeText){
+        navigator.clipboard.writeText(txt).then(()=>showToast('Copied'));
+      } else {
+        // Fallback
+        const ta = document.createElement('textarea');
+        ta.value = txt;
+        ta.style.position = 'fixed'; ta.style.left = '-9999px';
+        document.body.appendChild(ta); ta.select();
+        try { document.execCommand('copy'); showToast('Copied'); }
+        catch(e){ showToast('Copy failed'); }
+        finally{ ta.remove(); }
+      }
+    }
+
+    function showToast(msg){
+      toast.textContent = msg;
+      toast.classList.add('show');
+      setTimeout(()=>toast.classList.remove('show'), 900);
+    }
+
+    splitBtn.addEventListener('click', ()=>{
+      const txt = inputEl.value || '';
+      if (!txt.trim()){
+        showToast('Nothing to split');
+        return;
+      }
+      segmentsData = smartSplit(txt, MAX_LEN);
+      renderSegments();
+    });
+
+    clearSegsBtn.addEventListener('click', ()=>{
+      segmentsData = [];
+      renderSegments();
+    });
+
+    // --------------------------
+    // MP3 MERGER
+    // --------------------------
+    const SLOT_COUNT = 12;
+    const slotsEl = document.getElementById('slots');
+    const mergeBtn = document.getElementById('mergeBtn');
+    const clearBtn = document.getElementById('clearBtn');
+    const statusEl = document.getElementById('status');
+    const outputEl = document.getElementById('output');
+
+    // Each slot: { file, name, arrayBuffer, audioBuffer, duration }
+    const slotsData = new Array(SLOT_COUNT).fill(null);
+    let audioCtx; // created lazily
+
+    function ensureAudioCtx(){
+      if (!audioCtx){
+        const sr = 44100; // prefer 44.1k for MP3
+        audioCtx = new (window.AudioContext || window.webkitAudioContext)({ sampleRate: sr });
+      }
+      return audioCtx;
+    }
+
+    function renderSlots(){
+      slotsEl.innerHTML = '';
+      for (let i=0;i<SLOT_COUNT;i++){
+        const card = document.createElement('div');
+        card.className = 'slot';
+        card.dataset.index = String(i);
+
+        const h4 = document.createElement('h4');
+        h4.textContent = `Slot ${i+1}`;
+
+        const msg = document.createElement('div');
+        msg.className = 'dropmsg';
+        msg.textContent = 'Drop MP3 here or click to choose';
+
+        const info = document.createElement('div');
+        info.className = 'fileline';
+
+        const small = document.createElement('div');
+        small.className = 'small';
+
+        const actions = document.createElement('div');
+        actions.className = 'actions';
+
+        const chooseBtn = document.createElement('button');
+        chooseBtn.className = 'secondary';
+        chooseBtn.textContent = 'Choose…';
+        const clearSlotBtn = document.createElement('button');
+        clearSlotBtn.className = 'danger';
+        clearSlotBtn.textContent = 'Remove';
+
+        const fileInput = document.createElement('input');
+        fileInput.type = 'file';
+        fileInput.accept = 'audio/mpeg,audio/mp3';
+
+        chooseBtn.addEventListener('click', ()=>fileInput.click());
+        clearSlotBtn.addEventListener('click', ()=>setSlot(i, null));
+
+        fileInput.addEventListener('change', (e)=>{
+          const f = fileInput.files && fileInput.files[0];
+          if (f) handleFile(i, f);
+        });
+
+        // Drag & drop
+        card.addEventListener('dragover', (e)=>{ e.preventDefault(); card.classList.add('dragover'); });
+        card.addEventListener('dragleave', ()=>card.classList.remove('dragover'));
+        card.addEventListener('drop', (e)=>{
+          e.preventDefault(); card.classList.remove('dragover');
+          const f = e.dataTransfer.files && e.dataTransfer.files[0];
+          if (f) handleFile(i, f);
+        });
+        // Click card to choose
+        card.addEventListener('click', (e)=>{
+          if (e.target === chooseBtn || e.target === clearSlotBtn) return;
+          fileInput.click();
+        });
+
+        actions.append(chooseBtn, clearSlotBtn);
+        card.append(h4, msg, info, small, actions, fileInput);
+        slotsEl.appendChild(card);
+
+        // Populate if data exists
+        if (slotsData[i]){
+          msg.style.display='none';
+          info.textContent = `📄 ${slotsData[i].name}`;
+          small.textContent = slotsData[i].duration ? `⏱ ${formatTime(slotsData[i].duration)}` : '';
+        }
+      }
+    }
+
+    function setSlot(idx, data){
+      slotsData[idx] = data;
+      renderSlots();
+    }
+
+    function handleFile(idx, file){
+      if (!/\.mp3$/i.test(file.name) && !/^audio\/(mpeg|mp3)$/i.test(file.type)){
+        showStatus(`Slot ${idx+1}: Not an MP3 file`, true);
+        return;
+      }
+      const reader = new FileReader();
+      reader.onload = async () => {
+        const arrayBuffer = reader.result;
+        try{
+          const ctx = ensureAudioCtx();
+          // Decode to get duration (browser must support mp3 decoding)
+          const audioBuffer = await ctx.decodeAudioData(arrayBuffer.slice(0));
+          setSlot(idx, {
+            file, name:file.name, arrayBuffer, audioBuffer,
+            duration: audioBuffer.duration
+          });
+          showStatus(`Loaded ${file.name} into Slot ${idx+1}`);
+        }catch(err){
+          console.error(err);
+          showStatus(`Could not decode ${file.name}`, true);
+        }
+      };
+      reader.readAsArrayBuffer(file);
+    }
+
+    function showStatus(msg, isErr=false){
+      statusEl.textContent = msg;
+      statusEl.style.color = isErr ? '#ff9aa5' : '#aad0ff';
+    }
+
+    function formatTime(sec){
+      const s = Math.round(sec);
+      const m = Math.floor(s/60);
+      const r = s%60;
+      return `${m}:${String(r).padStart(2,'0')}`;
+    }
+
+    clearBtn.addEventListener('click', ()=>{
+      for (let i=0;i<SLOT_COUNT;i++) slotsData[i] = null;
+      renderSlots(); outputEl.innerHTML=''; showStatus('Cleared all slots');
+    });
+
+    // Merge button
+    mergeBtn.addEventListener('click', async ()=>{
+      outputEl.innerHTML = '';
+      const list = slotsData.map((d,i)=>({i,d})).filter(x=>!!x.d);
+      if (list.length === 0){
+        showStatus('No MP3s to merge', true);
+        return;
+      }
+      try{
+        showStatus('Preparing…');
+
+        // Ensure all decoded and resampled to 44.1kHz stereo
+        const targetSR = 44100;
+        const prepared = [];
+        for (let k=0;k<list.length;k++){
+          const {i, d} = list[k];
+          showStatus(`Processing Slot ${i+1} (${k+1}/${list.length})…`);
+          let buf = d.audioBuffer;
+          if (!buf){
+            const ctx = ensureAudioCtx();
+            buf = await ctx.decodeAudioData(d.arrayBuffer.slice(0));
+          }
+          // Resample & force stereo
+          const res = await resampleToStereo(buf, targetSR);
+          prepared.push(res);
+        }
+
+        // Concatenate PCM
+        const totalFrames = prepared.reduce((a,b)=>a + b.length, 0);
+        const left = new Float32Array(totalFrames);
+        const right = new Float32Array(totalFrames);
+        let offset = 0;
+        for (const b of prepared){
+          left.set(b.getChannelData(0), offset);
+          right.set(b.getChannelData(1), offset);
+          offset += b.length;
+        }
+
+        showStatus('Encoding MP3… (this runs entirely in your browser)');
+        const mp3Blob = encodeStereoToMp3(left, right, targetSR, 128); // kbps
+        const url = URL.createObjectURL(mp3Blob);
+
+        const a = document.createElement('a');
+        a.href = url; a.download = 'merged.mp3'; a.textContent = 'Download merged.mp3';
+        a.className = 'pill';
+
+        const audio = document.createElement('audio');
+        audio.controls = true; audio.src = url;
+
+        outputEl.append(a, audio);
+        showStatus('Done. MP3 ready ✅');
+      }catch(err){
+        console.error(err);
+        showStatus('Merge failed: ' + (err?.message || err), true);
+      }
+    });
+
+    async function resampleToStereo(audioBuffer, targetSR){
+      // If already stereo 44.1k, return as-is
+      const needSR = audioBuffer.sampleRate !== targetSR;
+      const needStereo = audioBuffer.numberOfChannels < 2;
+      if (!needSR && !needStereo) return audioBuffer;
+
+      const length = Math.ceil(audioBuffer.duration * targetSR);
+      const offline = new OfflineAudioContext(2, length, targetSR);
+      const src = offline.createBufferSource();
+
+      // Ensure stereo input
+      let inBuf = audioBuffer;
+      if (audioBuffer.numberOfChannels === 1){
+        // duplicate mono to stereo buffer first (at original SR)
+        const tmp = offline.context ? offline.context.createBuffer(2, audioBuffer.length, audioBuffer.sampleRate)
+                                    : new AudioBuffer({length: audioBuffer.length, sampleRate: audioBuffer.sampleRate, numberOfChannels: 2});
+      }
+
+      // Workaround: schedule original buffer into OfflineAudioContext; it will handle channel count
+      src.buffer = audioBuffer;
+      src.connect(offline.destination);
+      src.start(0);
+      const rendered = await offline.startRendering();
+
+      // Ensure exactly 2 channels
+      if (rendered.numberOfChannels === 2) return rendered;
+      const out = new AudioBuffer({ length: rendered.length, sampleRate: targetSR, numberOfChannels: 2 });
+      out.getChannelData(0).set(rendered.getChannelData(0));
+      out.getChannelData(1).set(rendered.numberOfChannels >= 2 ? rendered.getChannelData(1) : rendered.getChannelData(0));
+      return out;
+    }
+
+    function encodeStereoToMp3(leftF32, rightF32, sampleRate, kbps=128){
+      const blockSize = 1152;
+      const mp3encoder = new lamejs.Mp3Encoder(2, sampleRate, kbps);
+      const mp3Data = [];
+      let left16 = floatTo16(leftF32);
+      let right16 = floatTo16(rightF32);
+      for (let i = 0; i < left16.length; i += blockSize){
+        const l = left16.subarray(i, i + blockSize);
+        const r = right16.subarray(i, i + blockSize);
+        const enc = mp3encoder.encodeBuffer(l, r);
+        if (enc.length) mp3Data.push(enc);
+      }
+      const end = mp3encoder.flush();
+      if (end.length) mp3Data.push(end);
+      return new Blob(mp3Data, { type: 'audio/mpeg' });
+    }
+
+    function floatTo16(f32){
+      const i16 = new Int16Array(f32.length);
+      for (let i=0;i<f32.length;i++){
+        let s = Math.max(-1, Math.min(1, f32[i]));
+        i16[i] = s < 0 ? s * 0x8000 : s * 0x7FFF;
+      }
+      return i16;
+    }
+
+    // Initial render
+    renderSlots();
+  })();
+  </script>
+</body>
+</html>
