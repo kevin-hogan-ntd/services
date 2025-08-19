@@ -209,15 +209,20 @@
       setTimeout(()=>toast.classList.remove('show'), 900);
     }
 
-    splitBtn.addEventListener('click', ()=>{
-      const txt = inputEl.value || '';
-      if (!txt.trim()){
-        showToast('Nothing to split');
-        return;
-      }
-      segmentsData = smartSplit(txt, MAX_LEN);
-      renderSegments();
-    });
+   splitBtn.addEventListener('click', ()=>{
+  let txt = inputEl.value || '';
+  if (!txt.trim()){
+    showToast('Nothing to split');
+    return;
+  }
+
+  // NEW: remove all line breaks and carriage returns, collapse extra spaces
+  txt = txt.replace(/(\r\n|\r|\n)/g, ' ').replace(/\s{2,}/g, ' ').trim();
+
+  segmentsData = smartSplit(txt, MAX_LEN);
+  renderSegments();
+});
+
 
     clearSegsBtn.addEventListener('click', ()=>{
       segmentsData = [];
