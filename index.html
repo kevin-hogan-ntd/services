@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>NTD News Services</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <style>
+    :root{
+      --radius:16px;
+      --shadow:0 4px 10px rgba(0,0,0,.06);
+      --shadow-hover:0 10px 20px rgba(0,0,0,.12);
+      --bg:#f5f7fa;
+      --card-bg:#ffffff;
+      --text:#222;
+      --accent:#134e9b;
+    }
+    *{box-sizing:border-box;margin:0;padding:0}
+    body{
+      font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+      background:var(--bg);color:var(--text);display:flex;flex-direction:column;
+      align-items:center;min-height:100vh;padding-bottom:60px}
+    h1{margin:32px 0 22px;font-size:2.4rem;text-align:center;color:var(--accent)}
+    h2{margin-top:26px;margin-bottom:14px;font-size:1.4rem;color:#444}
+    .grid{
+      display:grid;gap:24px;width:92%;max-width:1400px;
+      grid-template-columns:repeat(auto-fill,minmax(220px,1fr))}
+    .card{
+      background:var(--card-bg);border-radius:var(--radius);
+      box-shadow:var(--shadow);overflow:hidden;display:flex;flex-direction:column;
+      transition:transform .2s ease,box-shadow .2s ease}
+    .card:hover{transform:translateY(-4px);box-shadow:var(--shadow-hover)}
+    .main-link{text-decoration:none;color:inherit;flex-grow:1;display:block}
+    .main-link img{width:100%;height:200px;object-fit:contain;display:block;padding:24px}
+    .title{padding:0 16px 16px;font-size:1.15rem;font-weight:600;text-align:center}
+    .guide-link{
+      display:block;margin:0 16px 18px;padding:8px 0;border-radius:8px;
+      background:var(--accent);color:#fff;text-align:center;text-decoration:none;
+      font-size:.85rem;font-weight:500;transition:background .2s ease}
+    .guide-link:hover,.guide-link:focus{background:#0e3d7d}
+    .card:focus-within{outline:3px solid var(--accent)}
+    @media(max-width:600px){
+      h1{font-size:2rem}
+      .grid{gap:20px}
+      .main-link img{height:140px;padding:16px}
+    }
+    select{margin:10px;padding:6px}
+  </style>
+</head>
+<body>
+  <h1>NTD News Services</h1>
+
+  <div class="grid">
+    <!-- Retriever -->
+    <div class="card">
+      <a class="main-link" href="https://ntdservices-retriever.hf.space/" target="_blank">
+        <img src="retriever.png" alt="Retriever">
+        <div class="title">Retriever</div>
+      </a>
+      <a class="guide-link" href="/retriever.txt" target="_blank">How-To-Use Guide</a>
+    </div>
+
+    <!-- Anchor Dashboard -->
+    <div class="card">
+      <a class="main-link" href="https://ntdservices-anchordashboard.hf.space/" target="_blank">
+        <img src="anchor_dashboard.png" alt="Anchor Dashboard">
+        <div class="title">Anchor Dashboard</div>
+      </a>
+      <a class="guide-link" href="/anchor_dashboard.txt" target="_blank">How-To-Use Guide</a>
+    </div>
+
+    <!-- Unfamiliar Words Sheet -->
+    <div class="card">
+      <a class="main-link" href="https://docs.google.com/spreadsheets/d/1o_LfUI3FaNH_ZGJ7iMAsOSJw1Sw3z12n7nLSXE60LKs/edit?gid=0#gid=0" target="_blank">
+        <img src="unfamiliar_words.png" alt="Unfamiliar Words Sheet">
+        <div class="title">Unfamiliar Words Sheet</div>
+      </a>
+      <a class="guide-link" href="/unfamiliar_words_sheet.txt" target="_blank">How-To-Use Guide</a>
+    </div>
+
+    <!-- Presentation App -->
+    <div class="card">
+      <a class="main-link" href="https://ntd-news-presentation-app-v3.hf.space/" target="_blank">
+        <img src="presentation_app.png" alt="Presentation App">
+        <div class="title">Presentation App</div>
+      </a>
+      <a class="guide-link" href="/presentation_app.txt" target="_blank">How-To-Use Guide</a>
+    </div>
+
+    <!-- Aggregator -->
+    <div class="card">
+      <a class="main-link" href="https://ntdservices-aggregator.hf.space/" target="_blank">
+        <img src="aggregator.png" alt="Aggregator">
+        <div class="title">News Aggregator</div>
+      </a>
+      <a class="guide-link" href="/aggregator.txt" target="_blank">How-To-Use Guide</a>
+    </div>
+  </div>
+
+  <hr style="width:92%;margin:18px auto;border:0;border-top:40px solid #ccc;">
+
+  <h2>Extras</h2>
+  <div class="grid">
+
+    <!-- File Hub -->
+    <div class="card">
+      <a class="main-link" href="https://ntdservices-file-hub.hf.space/" target="_blank">
+        <img src="filehub.png" alt="File Hub">
+        <div class="title">File Hub</div>
+      </a>
+      <a class="guide-link" href="/retriever.txt" target="_blank">How-To-Use Guide</a>
+    </div>
+
+    <!-- TTS -->
+    <div class="card">
+      <a class="main-link" href="https://luvvoice.com/" target="_blank">
+        <img src="tts.png" alt="File Hub">
+        <div class="title">Luvvoice Text-to-Speech</div>
+      </a>
+      <a class="guide-link" href="/tts.txt" target="_blank">How-To-Use Guide</a>
+    </div>
+
+    <!-- Merge PDFs -->
+    <div class="card">
+      <a class="main-link" href="https://www.ilovepdf.com/merge_pdf" target="_blank">
+        <img src="merge-pdfs.png" alt="File Hub">
+        <div class="title">Merge PDFs</div>
+      </a>
+      <a class="guide-link" href="/merge-pdfs.txt" target="_blank">How-To-Use Guide</a>
+    </div>
+
+    <!-- Chrome Extension -->
+    <div class="card">
+      <a class="main-link" href="Text%20and%20Audio%20Only.zip" download>
+        <img src="extension.png" alt="Chrome Extension">
+        <div class="title">Download Chrome Extension for Text & Audio Only</div>
+      </a>
+      <a class="guide-link" href="/extension.txt" target="_blank">How-To-Use Guide</a>
+    </div>
+
+    <!-- Splitter-Merger -->
+    <div class="card">
+      <a class="main-link" href="https://services.hogandashboard.com/splitter-merger/" target="_blank">
+        <img src="splitter-merger.png" alt="splitter-merger">
+        <div class="title">Split Text - Merge Audio</div>
+      </a>
+      <a class="guide-link" href="/splitter-merger.txt" target="_blank">How-To-Use Guide</a>
+    </div>
+
+    <!-- HF Token -->
+    <div class="card">
+      <a class="main-link" href="https://huggingface.co/organizations/NTD-News/share/BHDDfyelDYBmZsQObWmxdTzGwWOEiFniLa" target="_blank">
+        <img src="hf-token.png" alt="splitter-merger">
+        <div class="title">Services Token</div>
+      </a>
+      <a class="guide-link" href="/hf-token.txt" target="_blank">How-To-Use Guide</a>
+    </div>
+
+    <!-- HF Backend -->
+    <div class="card">
+      <a class="main-link" href="https://huggingface.co/spaces/NTD-News/presentation-app-v3" target="_blank">
+        <img src="hf-backend.png" alt="splitter-merger">
+        <div class="title">Services Backend</div>
+      </a>
+      <a class="guide-link" href="/hf-backend.txt" target="_blank">How-To-Use Guide</a>
+    </div>
+
+  
+  
+  </div>
+
+
+</body>
+</html>

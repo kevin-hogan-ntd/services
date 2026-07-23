@@ -1,0 +1,34 @@
+[
+  {
+    "day":  5,
+    "type": "minor",
+    "imageUrl": "https://via.placeholder.com/80",
+    "offset": 100,
+    "width":  80,
+    "height": 80
+  },
+  {
+    "day": 20,
+    "type": "major",
+    "imageUrl": "https://via.placeholder.com/120",
+    "offset": 150,
+    "width": 120,
+    "height": 120
+  },
+  {
+    "day": 50,
+    "type": "minor",
+    "imageUrl": "https://via.placeholder.com/80",
+    "offset": 120,
+    "width":  80,
+    "height": 80
+  },
+  {
+    "day": 75,
+    "type": "major",
+    "imageUrl": "https://via.placeholder.com/120",
+    "offset": 180,
+    "width": 120,
+    "height": 120
+  }
+]

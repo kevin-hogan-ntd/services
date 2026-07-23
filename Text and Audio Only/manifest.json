@@ -1,0 +1,13 @@
+{
+  "name": "Text Modes",
+  "description": "Hide images or video visuals across tabs (Normal · Text-Only · Text+Audio).",
+  "version": "1.0",
+  "manifest_version": 3,
+
+  "action": { "default_popup": "popup.html", "default_icon": { "32": "icon32.png" } },
+
+  "background": { "service_worker": "background.js" },
+
+  "permissions": [ "scripting", "tabs", "storage" ],
+  "host_permissions": [ "<all_urls>" ]
+}

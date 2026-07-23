@@ -1,0 +1,790 @@
+non-dictionary words
+biden
+dhs (pkg?)
+genalo
+kyiv
+lutnick
+nera
+noem
+pasdar
+pfrance (pkg?)
+porsche
+rivian
+simi
+soundbite (pkg?)
+weesstt
+woorrlldd
+youssef
+
+
+infrequent words
+about, 1
+added, 1
+adding, 1
+addresses, 1
+advance, 1
+aegean, 1
+afternoon, 1
+against, 1
+agency, 1
+ago, 1
+agree, 1
+agreements, 1
+air, 1
+alerts, 1
+aliens, 1
+all, 1
+allowing, 1
+alone, 1
+already, 1
+andrew, 1
+apparently, 1
+appears, 1
+april, 1
+area, 1
+areas, 1
+arleen, 1
+arrived, 1
+assistance, 1
+attend, 1
+authority, 1
+back, 1
+beginning, 1
+beijing, 1
+believes, 1
+big, 1
+billion, 1
+blessed, 1
+british, 1
+broke, 1
+burning, 1
+businesses, 1
+c, 1
+call, 1
+cameras, 1
+can, 1
+cannot, 1
+capital, 1
+carney, 1
+causes, 1
+cease, 1
+century, 1
+chains, 1
+chinese, 1
+christopher, 1
+clear, 1
+coastal, 1
+come, 1
+commerce, 1
+communities, 1
+company, 1
+compliant, 1
+concerns, 1
+conference, 1
+confidential, 1
+constructive, 1
+contact, 1
+continues, 1
+countermeasures, 1
+counterparts, 1
+counties, 1
+courage, 1
+course, 1
+crackdown, 1
+creation, 1
+criminal, 1
+critical, 1
+cuba, 1
+cut, 1
+cuts, 1
+danger, 1
+decades, 1
+decisions, 1
+defense, 1
+department, 1
+dependent, 1
+deport, 1
+destruction, 1
+devastated, 1
+did, 1
+direct, 1
+directly, 1
+disabled, 1
+discuss, 1
+discussed, 1
+discussions, 1
+distrust, 1
+docks, 1
+doge, 1
+dollar, 1
+dollars, 1
+draft, 1
+drafted, 1
+dropped, 1
+due, 1
+during, 1
+duties, 1
+earths, 1
+ease, 1
+electronics, 1
+elon, 1
+employed, 1
+escalating, 1
+evacuate, 1
+evacuated, 1
+even, 1
+executive, 1
+expansion, 1
+expert, 1
+export, 1
+exports, 1
+factored, 1
+fair, 1
+far, 1
+father, 1
+fiona, 1
+forced, 1
+foreign, 1
+formally, 1
+fox, 1
+french, 1
+friday, 1
+fuel, 1
+full, 1
+fundamental, 1
+g, 1
+gaggle, 1
+gain, 1
+gained, 1
+gaza, 1
+geneva, 1
+gives, 1
+goal, 1
+going, 1
+gone, 1
+good, 1
+goods, 1
+grave, 1
+great, 1
+greece, 1
+greek, 1
+green, 1
+growth, 1
+guy, 1
+haiti, 1
+hardest, 1
+heading, 1
+help, 1
+highlighted, 1
+historically, 1
+holds, 1
+hope, 1
+horseback, 1
+horses, 1
+hot, 1
+howard, 1
+i, 1
+if, 1
+immigrant, 1
+impacting, 1
+important, 1
+incident, 1
+increasing, 1
+indirectly, 1
+individuals, 1
+industrial, 1
+industries, 1
+inside, 1
+intro, 1
+investigators, 1
+investment, 1
+involves, 1
+issued, 1
+join, 1
+jonathan, 1
+kala, 1
+kamauumusic, 1
+katharine, 1
+keep, 1
+kenneth, 1
+known, 1
+kristi, 1
+lakes, 1
+last, 1
+later, 1
+latest, 1
+lawyer, 1
+leader, 1
+leads, 1
+leaving, 1
+legal, 1
+licenses, 1
+lift, 1
+light, 1
+listen, 1
+liverpool, 1
+london, 1
+looking, 1
+m, 1
+major, 1
+making, 1
+mandate, 1
+mark, 1
+meaningful, 1
+media, 1
+memorandums, 1
+message, 1
+metals, 1
+michigan, 1
+midwest, 1
+mill, 1
+minerals, 1
+minister, 1
+minnesota, 1
+moe, 1
+monday, 1
+money, 1
+mos, 1
+moscow, 1
+moving, 1
+mr, 1
+much, 1
+multiple, 1
+musk, 1
+n, 1
+narrows, 1
+near, 1
+nearly, 1
+needed, 1
+needs, 1
+newsroom, 1
+nicaragua, 1
+nice, 1
+night, 1
+non, 1
+nothing, 1
+notice, 1
+number, 1
+objective, 1
+obligations, 1
+obstructing, 1
+occasion, 1
+offered, 1
+often, 1
+oliver, 1
+once, 1
+operated, 1
+operational, 1
+operations, 1
+other, 1
+outcome, 1
+outside, 1
+oval, 1
+owned, 1
+owner, 1
+panel, 1
+parade, 1
+paris, 1
+parole, 1
+passed, 1
+pattern, 1
+pelican, 1
+peninsula, 1
+per, 1
+perhaps, 1
+permitted, 1
+persists, 1
+pinpointed, 1
+planned, 1
+politicians, 1
+positions, 1
+possible, 1
+practice, 1
+praised, 1
+premier, 1
+present, 1
+press, 1
+presser, 1
+pressure, 1
+prevent, 1
+previously, 1
+prime, 1
+printed, 1
+production, 1
+products, 1
+program, 1
+progress, 1
+promises, 1
+protecting, 1
+protections, 1
+protests, 1
+put, 1
+quality, 1
+quickly, 1
+quote, 1
+raging, 1
+ramping, 1
+ramps, 1
+rare, 1
+read, 1
+ready, 1
+reassigned, 1
+receive, 1
+record, 1
+reemphasized, 1
+referendum, 1
+region, 1
+regularly, 1
+rejected, 1
+relevant, 1
+removal, 1
+repair, 1
+repeated, 1
+replica, 1
+reports, 1
+representatives, 1
+residents, 1
+responded, 1
+restrict, 1
+retiring, 1
+reuters, 1
+revival, 1
+revoke, 1
+richards, 1
+riders, 1
+role, 1
+roll, 1
+root, 1
+run, 1
+sailed, 1
+saint, 1
+santa, 1
+saskatchewan, 1
+saying, 1
+scale, 1
+scott, 1
+searching, 1
+semiconductor, 1
+set, 1
+several, 1
+should, 1
+sides, 1
+since, 1
+single, 1
+site, 1
+sits, 1
+slowly, 1
+smoke, 1
+social, 1
+some, 1
+sovereignty, 1
+special, 1
+specify, 1
+spokesman, 1
+stand, 1
+start, 1
+stealing, 1
+steven, 1
+stole, 1
+strip, 1
+student, 1
+substantive, 1
+suburb, 1
+such, 1
+sunday, 1
+supply, 1
+surprise, 1
+suspects, 1
+switzerland, 1
+targeted, 1
+tease, 1
+teaser, 1
+tempo, 1
+tensions, 1
+their, 1
+then, 1
+these, 1
+thomas, 1
+those, 1
+thousands, 1
+throughout, 1
+time, 1
+tolerated, 1
+top, 1
+toward, 1
+tradition, 1
+twenty, 1
+uk, 1
+underway, 1
+updated, 1
+upheld, 1
+using, 1
+valley, 1
+ve, 1
+vessel, 1
+vetting, 1
+violations, 1
+visa, 1
+visitors, 1
+voters, 1
+wading, 1
+wants, 1
+washington, 1
+wasn, 1
+watch, 1
+wednesday, 1
+week, 1
+weeks, 1
+weighed, 1
+welcome, 1
+were, 1
+west, 1
+western, 1
+when, 1
+who, 1
+wide, 1
+win, 1
+wisconsin, 1
+work, 1
+would, 1
+wrote, 1
+yesterday, 1
+yet, 1
+according, 2
+across, 2
+action, 2
+again, 2
+also, 2
+american, 2
+another, 2
+any, 2
+arian, 2
+b, 2
+before, 2
+being, 2
+blume, 2
+both, 2
+bradley, 2
+business, 2
+by, 2
+california, 2
+calls, 2
+cam, 2
+central, 2
+changes, 2
+chris, 2
+cities, 2
+city, 2
+columbus, 2
+coming, 2
+constitution, 2
+core, 2
+correspondent, 2
+could, 2
+country, 2
+court, 2
+daily, 2
+day, 2
+declared, 2
+delegation, 2
+details, 2
+document, 2
+drilled, 2
+earlier, 2
+economic, 2
+emergency, 2
+ends, 2
+era, 2
+example, 2
+government, 2
+group, 2
+h, 2
+half, 2
+head, 2
+here, 2
+him, 2
+his, 2
+hit, 2
+hole, 2
+how, 2
+immigration, 2
+international, 2
+istanbul, 2
+june, 2
+just, 2
+kremlin, 2
+live, 2
+look, 2
+lose, 2
+main, 2
+manitoba, 2
+migrant, 2
+military, 2
+new, 2
+next, 2
+northern, 2
+open, 2
+or, 2
+organization, 2
+over, 2
+own, 2
+part, 2
+pennsylvania, 2
+people, 2
+pittsburgh, 2
+plant, 2
+policy, 2
+processing, 2
+promo, 2
+protection, 2
+province, 2
+public, 2
+push, 2
+realignment, 2
+releases, 2
+round, 2
+safe, 2
+same, 2
+scotus, 2
+sea, 2
+second, 2
+secretary, 2
+ship, 2
+strategy, 2
+struck, 2
+supreme, 2
+t, 2
+them, 2
+thieves, 2
+thousand, 2
+told, 2
+treaty, 2
+under, 2
+upper, 2
+visiting, 2
+wall, 2
+want, 2
+warning, 2
+we, 2
+well, 2
+whole, 2
+accuses, 3
+an, 3
+black, 3
+burglars, 3
+chief, 3
+commercial, 3
+deputy, 3
+end, 3
+entire, 3
+entry, 3
+european, 3
+federal, 3
+funding, 3
+had, 3
+illegal, 3
+immigrants, 3
+jack, 3
+leadership, 3
+list, 3
+made, 3
+make, 3
+massive, 3
+meeting, 3
+memorandum, 3
+million, 3
+news, 3
+one, 3
+order, 3
+parts, 3
+police, 3
+senators, 3
+speak, 3
+staff, 3
+status, 3
+steel, 3
+tariff, 3
+tariffs, 3
+than, 3
+travel, 3
+turkey, 3
+two, 3
+ukrainian, 3
+violating, 3
+while, 3
+wildfires, 3
+world, 3
+ws, 3
+
+
+long words
+administration
+confidential
+constitution
+constructive
+correspondent
+countermeasures
+counterparts
+historically
+international
+investigators
+organization
+pennsylvania
+reemphasized
+representatives
+runningorder
+saskatchewan
+semiconductor
+
+
+least frequent 150 known words (from dictionary and en_full.txt)
+reemphasized (rank 1)
+pkg (rank 3)
+scotus (rank 6)
+memorandums (rank 13)
+nsr (rank 16)
+ntd (rank 20)
+arleen (rank 26)
+wp (rank 36)
+presser (rank 41)
+realignment (rank 45)
+wildfires (rank 51)
+semiconductor (rank 67)
+arian (rank 75)
+nr (rank 78)
+ramping (rank 92)
+tariffs (rank 94)
+substantive (rank 100)
+elon (rank 101)
+factored (rank 110)
+ws (rank 111)
+reuters (rank 121)
+impacting (rank 122)
+protections (rank 139)
+saskatchewan (rank 145)
+manitoba (rank 148)
+sot (rank 152)
+tariff (rank 152)
+blume (rank 153)
+crackdown (rank 155)
+doge (rank 183)
+aegean (rank 184)
+gaggle (rank 191)
+pinpointed (rank 191)
+compliant (rank 192)
+mos (rank 221)
+earths (rank 225)
+inception (rank 232)
+countermeasures (rank 234)
+teaser (rank 236)
+vetting (rank 238)
+ramps (rank 251)
+counterparts (rank 260)
+persists (rank 263)
+upheld (rank 285)
+memorandum (rank 289)
+kala (rank 295)
+migrant (rank 296)
+wading (rank 298)
+kristi (rank 300)
+promo (rank 301)
+referendum (rank 317)
+alerts (rank 322)
+newsroom (rank 364)
+exports (rank 372)
+carney (rank 393)
+restrict (rank 400)
+highlighted (rank 452)
+deport (rank 459)
+revoke (rank 459)
+accuses (rank 462)
+escalating (rank 465)
+musk (rank 466)
+katharine (rank 467)
+vo (rank 488)
+indirectly (rank 505)
+specify (rank 542)
+counties (rank 543)
+sovereignty (rank 551)
+obstructing (rank 563)
+gaza (rank 567)
+suburb (rank 578)
+licenses (rank 603)
+volkswagen (rank 619)
+nicaragua (rank 621)
+reassigned (rank 631)
+pelican (rank 635)
+kremlin (rank 664)
+narrows (rank 668)
+distrust (rank 684)
+historically (rank 720)
+revival (rank 741)
+agreements (rank 747)
+drilled (rank 749)
+tensions (rank 762)
+ukrainian (rank 811)
+mandate (rank 828)
+midwest (rank 830)
+burglars (rank 832)
+constructive (rank 855)
+haiti (rank 894)
+venezuela (rank 915)
+minerals (rank 916)
+spokesman (rank 916)
+metals (rank 927)
+oval (rank 939)
+violations (rank 949)
+coastal (rank 967)
+replica (rank 969)
+peninsula (rank 1057)
+senators (rank 1071)
+ukraine (rank 1076)
+correspondent (rank 1087)
+tolerated (rank 1095)
+protests (rank 1116)
+export (rank 1127)
+tempo (rank 1130)
+updated (rank 1186)
+delegation (rank 1223)
+discussions (rank 1227)
+horseback (rank 1228)
+violating (rank 1248)
+releases (rank 1256)
+drafted (rank 1265)
+immigrant (rank 1266)
+intro (rank 1273)
+removal (rank 1396)
+premier (rank 1420)
+minnesota (rank 1441)
+evacuated (rank 1453)
+obligations (rank 1457)
+underway (rank 1471)
+investments (rank 1472)
+liverpool (rank 1476)
+formally (rank 1485)
+wisconsin (rank 1502)
+communities (rank 1545)
+trump (rank 1566)
+retiring (rank 1600)
+weighed (rank 1650)
+riders (rank 1651)
+praised (rank 1652)
+representatives (rank 1693)
+lakes (rank 1699)
+immigrants (rank 1714)
+expansion (rank 1721)
+commerce (rank 1748)
+investigators (rank 1771)
+dependent (rank 1782)
+voters (rank 1784)
+columbus (rank 1829)
+electronics (rank 1906)
+richards (rank 1924)
+meaningful (rank 1935)
+pittsburgh (rank 1937)
+targeted (rank 2064)
+arrests (rank 2089)
+operated (rank 2093)
+michigan (rank 2114)
+istanbul (rank 2117)
+raging (rank 2135)
